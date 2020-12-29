@@ -1,0 +1,85 @@
+.debug-title {
+  margin-bottom: 40px;
+}
+.qrcode-name {
+  margin-left: 10px;
+}
+.qrcode > img {
+  display: block;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+}
+.qrcode-tips {
+  text-align: center;
+  margin-top: 20px;
+}
+.qrcode-tips a, .qrcode-tips a:link {
+  color: #00B4FF;
+  text-decoration: none;
+}
+.qrcode-tips a:hover, .qrcode-tips a:active {
+  color: #238FFF;
+}
+.pages-box {
+  max-height: 330px;
+  overflow-y: auto;
+}
+.pages-box .page-item{
+  display: inline-block;
+  padding: 5px 8px;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 5px;
+  margin: 10px 5px;
+  color:#717171;
+  border:1px solid #ddd;
+  transition: all .2s ease;
+}
+.pages-box .page-item:hover{
+  border-color:#0088fb;
+  background: #0088fb;
+  color:#fff;
+}
+.pages-box .page-item.active {
+  border-color:#0088fb;
+  background: #0088fb;
+  color:#fff;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.container {
+  position: relative;
+}
+
+.header {
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 58px;
+  white-space: nowrap;
+  background: #fff;
+  box-shadow: 0 8px 24px -2px rgba(0,0,0,.05);
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+}
+
+.fav-icon {
+  width: 24px;
+  height: auto;
+}
+
+.header-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.header-wrap span {
+  margin-left: 8px;
+}

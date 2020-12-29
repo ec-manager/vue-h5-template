@@ -1,12 +1,1 @@
-{
-  "name": "vue-h5",
-  "version": "1.0.0",
-  "description": "vue H5 project template",
-  "author": "ec_frd",
-  "devDependencies": {
-
-  },
-  "dependencies": {
-
-  }
-}
+{"name":"ares2020","private":true,"devDependencies":{},"dependencies":{"css-loader":"0.28.0","postcss-import":"11.0.0","postcss-loader":"2.0.8","postcss-url":"7.2.1","vue":"2.5.22","vue-style-loader":"3.0.1"},"version":"1.0.0"}
