@@ -1,0 +1,19 @@
+<li>
+    <!-- 单券领取 -->
+    <template v-if="couponInfo.obtainType == 10">
+        <a href="javascript:;" v-stat="'BTN_COUPON_' + item.couponId" @click="getCoupunEvent(item.couponId, couponInfo.sceneId, couponInfo.discountStatus[item.couponId])">
+            <slot name="default" :status="couponInfo.discountStatus[item.couponId]">
+                <img v-lazy="getImgUrl(item, couponInfo.discountStatus[item.couponId])" class="imgauto" :data-status="couponInfo.discountStatus[item.couponId]" :key="couponInfo.discountStatus[item.couponId]"/>
+            </slot>
+        </a>
+    </template>
+
+    <!-- 多券领取 -->
+    <template v-else>
+        <a href="javascript:;" v-stat="'BTN_COUPON_' + item.couponId" @click="getCoupunEvent(item.couponId, couponInfo.sceneId, couponInfo.status)">
+            <slot name="default" :status="couponInfo.status">
+                <img v-lazy="getImgUrl(item, couponInfo.status)" class="imgauto" :data-status="couponInfo.status" :key="couponInfo.status"/>
+            </slot>
+        </a>
+    </template>
+</li>

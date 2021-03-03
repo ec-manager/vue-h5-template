@@ -1,0 +1,15 @@
+ <div>
+    <!--非app环境内头部-->
+    <div class="immersive-header" v-if="!isInApp" :style="{'background-color': isTransformColor ? transformBgColor : bgColor}">
+        <div class="header-left" @click="leftBtnClick">
+            <img class="header-left-icon" :src="tool.addDomain(isTransformColor ? transformArrowIcon : arrowIcon)">
+        </div>
+        <div class="header-title text-of" :style="{'color': isTransformColor ? transformTextColor : textColor}">{{title}}</div>
+        <div class="header-right hide-ios-tap" @click="rightBtnCallBack" v-stat="stat">
+            <slot>
+                <span class="g-right" :style="{'color': isTransformColor ? transformTextColor : textColor}">{{content}}</span>
+            </slot>
+        </div>
+    </div>
+    <div class="is-web" v-if="!isInApp" :style="{'background-color': slotBgColor}"></div>
+ </div>

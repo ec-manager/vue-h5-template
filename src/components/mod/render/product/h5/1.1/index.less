@@ -1,0 +1,270 @@
+@import '../../../../../inc/sales/style/h5/1.0/product.less';
+
+.sales-pro{
+    &.sales-one-pro{
+        padding: 0 @pro_space_outside*2;
+        .sales-pro-item{
+            &:nth-child(n+2) {
+                margin-top: @pro_space_outside;
+            }
+        }
+    }
+
+    &.sales-two-pro{
+        padding: 0 @pro_space_outside/2;
+        .sales-pro-item {
+            padding: 0 @pro_space_outside/2;
+            &:nth-child(n+3) {
+                margin-top: @pro_space_outside;
+            }
+        }
+    }
+
+    &.sales-three-pro{
+        padding: 0 @pro_space_outside/2;
+        .sales-pro-item {
+            padding: 0 @pro_space_outside/2;
+            &:nth-child(n+4) {
+                margin-top: @pro_space_outside;
+            }
+        }
+    }
+}
+
+// 1行1列商品
+.sales-one-pro {
+    .pro-wrap {
+        .flex();
+        width: 100%;
+    }
+
+    // 商品图片区域
+    .pro-img-wrap {
+        box-sizing: border-box;
+        padding: 24px/@p 40px/@p;
+        width: 45%;
+        // 图片
+        img {
+            height: 248px/@p;
+        }
+        // 促销tag
+        .promotion-tag1 {
+            bottom: 30px/@p;
+        }
+        .promotion-tag2 {
+            bottom: 75px/@p;
+        }
+        .promotion-tag3 {
+            bottom: 120px/@p;
+        }
+    }
+
+    // 商品信息
+    .pro-info {
+        padding: 26px/@p 60px/@p 26px/@p 0;
+        overflow: hidden;
+        .fx(1);
+        .flex(jsb, v);
+        .pro-info-top{
+            .fx(1);
+            // 商品名
+            .pro-name {
+                height: 36px/@p;
+                line-height: 36px/@p;
+                .text-of();
+                font-size: 16px;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+            .pro-desc{
+                font-size: 12px;
+                line-height: 16px;
+                height: 32px;
+                .text-of-more(2);
+            }
+        }
+        .pro-price {
+            .amount {
+                font-weight: @font_weight_bold;
+                max-width: 100%;
+                color: #3b9bff;
+                .num {
+                    font-size: @font_size_larger;
+                    line-height: 14px;
+                }
+            }
+            .old-amount {
+                max-width: 100%;
+                margin-left: 5px;
+            }
+        }
+        // 月供
+        .mon-pay {
+            margin-top: 10px/@p;
+            .num {
+                color: #3b9bff;
+                font-weight: @font_weight_bold;
+                font-size: @font_size_larger;
+            }
+        }
+    }
+}
+
+// 1行2列商品
+.sales-two-pro {
+    .sales-pro-list {
+        .flex(wrap);
+    }
+    .sales-pro-item {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    // 商品图片
+    .pro-img-wrap {
+        padding: 30px/@p 0;
+        // 图片
+        img {
+            height: 225px/@p;
+        }
+        // 促销tag
+        .promotion-tag1 {
+            bottom: 10px/@p;
+        }
+        .promotion-tag2 {
+            bottom: 55px/@p;
+        }
+        .promotion-tag3 {
+            bottom: 100px/@p;
+        }
+    }
+
+    // 商品信息
+    .pro-info {
+        padding: 0 @pro_space_inside @pro_space_inside;
+        // 商品名
+        .pro-name {
+            height: 32px;
+            line-height: 16px;
+            .text-of-more(2);
+        }
+        // 商品标签
+        .pro-tag-list {
+            margin: 2px/@p 0 10px/@p;
+        }
+        // 商品价格
+        .pro-price {
+            margin-top: 7px/@p;
+
+            .flex(jsb);
+            // 活动价
+            .amount {
+                font-weight: @font_weight_bold;
+                max-width: 100%;
+                .text-of-more(1);
+                .num {
+                    font-size: @font_size_larger;
+                    line-height: 14px;
+                }
+            }
+            .old-amount {
+                max-width: 100%;
+                .text-of-more(1);
+            }
+        }
+        // 月供
+        .mon-pay {
+            margin-top: 17px/@p;
+            height: 60px/@p;
+            border-radius: @common_border_radius;
+            background-color: @red_color;
+            color: @white_color;
+            text-align: center;
+            font-size: @font_size_small;
+            line-height: 60px/@p;
+            .num {
+                font-size: @font_size_larger;
+            }
+        }
+    }
+}
+
+// 1行3列商品
+.sales-three-pro {
+    .sales-pro-list {
+        .flex(wrap);
+    }
+    .sales-pro-item {
+        width: 33.333333%;
+    }
+    // 商品图片
+    .pro-img-wrap {
+        padding-top: 35px/@p;
+        padding-bottom: 30px/@p;
+        // 乐黑卡
+        .lehei-tag {
+            padding-top: 1px/@p;
+            padding-left: 50px/@p;
+            height: 30px/@p;
+            font-size: @font_size_small;
+            line-height: 30px/@p;
+            &::before {
+                width: 50px/@p;
+                background-size: auto 20px/@p;
+            }
+        }
+        // 图片
+        img {
+            height: 180px/@p;
+        }
+        // 促销tag
+        .promotion-tag1 {
+            bottom: 10px/@p;
+        }
+        .promotion-tag2 {
+            bottom: 55px/@p;
+        }
+        .promotion-tag3 {
+            bottom: 100px/@p;
+        }
+    }
+    // 商品信息
+    .pro-info {
+        padding: 0 @pro_space_inside @pro_space_inside;
+        // 商品名
+        .pro-name {
+            height: 32px;
+            line-height: 16px;
+            .text-of-more(2);
+        }
+        // 价格
+        .pro-price {
+            font-size: @font_size_small;
+            // 活动价
+            .amount {
+                color: @red_color;
+                font-size: @font_size_small;
+                .num{
+                    font-size: 14px;
+                    font-size: @font_size_middle;
+                }
+            }
+            height: 14px;
+            .old-amount {
+                margin-left: 5px;
+            }
+        }
+        // 月供
+        .mon-pay {
+            margin-top: 5px/@p;
+            padding-top: 6px/@p;
+            border-top: 1px solid @border_color;
+            line-height: 1.2;
+            font-size: @font_size_small;
+            .num {
+                font-weight: @font_weight_bold;
+                font-size: @font_size_middle;
+            }
+        }
+    }
+}

@@ -1,0 +1,87 @@
+@import'swiper/dist/css/swiper.css';
+@import '../../../../../inc/sales/style/h5/1.0/product.less';
+
+// 1行多列商品
+.sales-pro-list {
+    padding: 0 2*@pro_space_outside;
+}
+
+.sales-pro-item {
+    width: 30%;
+
+    &:nth-child(n+2) {
+        margin-left: @pro_space_outside;
+    }
+}
+
+.sales-pro {
+    // 商品图片
+    .pro-img-wrap {
+        padding: 40px/@p 0;
+        // 图片
+        img {
+            height: 180px/@p;
+        }
+    }
+
+    // 乐黑卡
+    .lehei-tag {
+        padding-left: 50px/@p;
+        height: 30px/@p;
+        font-size: @font_size_small;
+        line-height: 30px/@p;
+        padding-top: 1px/@p;
+
+        &::before {
+            width: 50px/@p;
+            background-size: auto 20px/@p;
+        }
+    }
+
+    // 促销tag
+    .promotion-tag1 {
+        bottom: 10px/@p;
+    }
+    .promotion-tag2 {
+        bottom: 55px/@p;
+    }
+    .promotion-tag3 {
+        bottom: 100px/@p;
+    }
+
+    // 商品信息
+    .pro-info {
+        padding: 0 @pro_space_inside @pro_space_inside;
+    }
+
+    // 商品名
+    .pro-name {
+        height: 32px;
+        margin-bottom: 2px;
+        line-height: 16px;
+        .text-of-more(2);
+    }
+    // 商品价格
+    .pro-price {
+        height: 14px;
+    }
+    .amount {
+        color: @red_color;
+    }
+    .old-amount {
+        font-size: @font_size_small;
+        margin-left: 5px;
+    }
+    // 月供
+    .mon-pay {
+        margin-top: 5px/@p;
+        padding-top: 6px/@p;
+        border-top: 1px solid @border_color;
+        line-height: 1.2;
+        font-size: @font_size_small;
+        .num {
+            font-weight: @font_weight_bold;
+            font-size: @font_size_middle;
+        }
+    }
+}

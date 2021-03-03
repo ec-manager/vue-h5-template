@@ -1,0 +1,14 @@
+<div>
+    <slot name="defalut" :buyAmount="buyAmount" :loanAmount="loanAmount">
+        <ul class="lecard-amount-wrap">
+            <li class="lecard-amount-item">
+                <p>购物可用额度</p>
+                <p class="amount">&yen;<span>{{buyAmount}}</span></p>
+            </li>
+            <li class="lecard-amount-item">
+                <p>借款可用额度</p>
+                <p class="amount">&yen;<span>{{loanAmount}}</span></p>
+            </li>
+        </ul>
+    </slot>
+</div>

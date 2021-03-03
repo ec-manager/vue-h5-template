@@ -1,0 +1,23 @@
+<div class="mask-wrap" v-if="show" v-expose="'MASK_RULES_BOX'">
+    <div class="box-wrap">
+        <div class="box-module">
+            <p class="box-title">{{ruleConfig.rule_title || '返现秘籍'}}</p>
+            <div class="rule-content">
+                <template v-for="rule_item in ruleConfig.rule_desc">
+                    <p class="box-tips">{{rule_item.title}}</p>
+                    <template v-if="rule_item.text_list && rule_item.text_list.length > 0">
+                        <template v-for="rule_text in rule_item.text_list">
+                            <p class="box-txt" :style="rule_text.style" v-if="rule_text.style">{{rule_text.text}}</p>
+                            <p class="box-txt" v-else>{{rule_text.text}}</p>
+                        </template>
+                    </template>
+                </template>
+            </div>
+            <div class="box-btn-wrap">
+                <div class="box-btn" @click="closeModal" v-stat="'BTN_CLOSE_RULES_BOX'">
+                    <span class="box-right">{{ruleConfig.rule_button_text}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

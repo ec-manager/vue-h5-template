@@ -1,0 +1,163 @@
+@import '../../../../../inc/sales/style/h5/1.0/product.less';
+
+h3 {
+    padding: 30px/@p 0 20px/@p;
+    color: #d44a42;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    em {
+        font-size: 12px;
+        opacity: .85;
+        margin-left: 10px/@p;
+    }
+}
+
+// 1行1列商品
+.seckill-one-pro {
+    padding: 0 2*@pro_space_outside;
+    .sales-pro-list {
+        li {
+            width: 100%;
+            &:nth-child(n+2) {
+                margin-top: @pro_space_outside;
+            }
+        }
+    }
+    .pro-wrap {
+        .flex(h);
+        // 商品图片
+        .pro-img-wrap {
+            width: 35%;
+            padding: 69px/@p 0 30px/@p;
+            box-sizing: border-box;
+            // 图片
+            img {
+                height: 248px/@p;
+            }
+            // 秒杀价
+            .seckill-price {
+                bottom: 10px/@p;
+            }
+        }
+        // 商品信息
+        .pro-info {
+            padding: @pro_space_inside;
+
+            .fx(1);
+            .flex(jsb, v);
+            // 商品名
+            .pro-name {
+                height: 34px;
+                .text-of-more(2);
+            }
+            .pro-price {
+                margin-top: 20px/@p;
+            }
+        }
+    }
+}
+
+// 1行2列商品
+.seckill-two-pro {
+    padding: 0 (@pro_space_outside + @pro_space_outside/2);
+    .sales-pro-list {
+        .flex(wrap);
+        li {
+            padding: 0 @pro_space_outside/2;
+            width: 50%;
+            &:nth-child(n+3) {
+                margin-top: @pro_space_outside;
+            }
+        }
+    }
+    .pro-wrap {
+        // 商品图片
+        .pro-img-wrap {
+            padding: 50px/@p 0 30px/@p;
+            // 图片
+            img {
+                height: 225px/@p;
+            }
+            // 促销价
+            .seckill-price {
+                bottom: 10px/@p;
+            }
+        }
+
+        // 商品信息
+        .pro-info {
+            padding: 0 @pro_space_inside @pro_space_inside;
+            // 商品名
+            .pro-name {
+                height: 34px;
+                .text-of-more(2);
+            }
+            // 商品价格
+            .pro-price {
+                margin-top: 7px/@p;
+
+                .flex(jsb,ae);
+                // 活动价
+                .amount {
+                    font-weight: 700;
+                    .num {
+                        font-size: @font_size_larger;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 1行3列商品
+.seckill-three-pro {
+    padding: 0 2*@pro_space_outside;
+    .sales-pro-list {
+        .flex(wrap);
+        li {
+            padding-right: @pro_space_outside;
+            width: 33.3%;
+            &:nth-child(3n) {
+                padding-right: 0;
+            }
+            &:nth-child(n+4) {
+                margin-top: @pro_space_outside;
+            }
+        }
+    }
+    .pro-wrap {
+        // 商品图片
+        .pro-img-wrap {
+            padding-top: 30px/@p;
+            padding-bottom: 40px/@p;
+            // 图片
+            img {
+                height: 180px/@p;
+            }
+            // 秒杀价
+            .seckill-price {
+                bottom: 8px/@p;
+            }
+        }
+        // 商品信息
+        .pro-info {
+            padding: 0 @pro_space_inside @pro_space_inside;
+            // 商品名
+            .pro-name {
+                height: 17px;
+                .text-of-more(1);
+            }
+            // 价格
+            .pro-price {
+                margin-top: 7px/@p;
+                // 活动价
+                .amount {
+                    .num {
+                        font-size: @font_size_large;
+                    }
+                }
+            }
+        }
+    }
+}

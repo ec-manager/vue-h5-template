@@ -1,0 +1,21 @@
+<div class="product-list-wrap">
+    <div class="product-type-list" v-for="(product, index) in list" :key="'activity' + index">
+        <div class="user-info">
+            <div class="user-img"><img v-lazy="tool.addDomain(product.guide_img_url)" :key="'guide_img_url_' + product.guide_img_url"></div>
+            <div class="user-name text-of">{{product.guide_name}}</div>
+            <div class="share-time">{{handleReleaseTime(product.release_time)}}</div>
+        </div>
+        <div class="title-wrap">
+            <span class="title">{{product.title}}</span>
+            <span class="content">{{product.content}}</span>
+        </div>
+        <!-- 另外抽组件的目的是比较好处理商品列表数据 -->
+        <activity-product-items 
+            :channel-id="product.channel_id"
+            :list="product.sku_list" 
+            :layout-type="product.layout_type" 
+            :channel-icon="channelIcon"
+            @getProductDetailUrl="getProductDetailUrl"
+        ></activity-product-items>
+    </div>
+</div>

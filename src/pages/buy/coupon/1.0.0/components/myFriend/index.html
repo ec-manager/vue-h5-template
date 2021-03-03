@@ -1,0 +1,105 @@
+<div class="my-friend">
+    <!--顶部推广文案图片-->
+    <img class="top-title-img" :src="imgSrc.topTitleImg">
+    
+    <template v-if="isShowCountInfo || !isLogin">
+        <template v-if="taskInfo.task_status == taskStatusConfig.notReceive || !isLogin">
+            <!--领取红包样式-->
+            <img :src="imgSrc.notReceiveBg" class="bonus-bg" @click="receiveBonus" v-stat="'IMG_RECEIVE_BONUS'">
+        </template>
+        <template v-else>
+            <!--已领取红包、好友帮赚-->
+            <div class="count-info-wrap">
+                <!--已领取红包-->
+                <template v-if="taskInfo.task_status == taskStatusConfig.received">
+                    <img class="received-bg" :src="imgSrc.receivedBg">
+                    <div class="count-info-content">
+                        <div class="received-amount">
+                            <span class="yen">&yen;</span>
+                            <span>{{taskInfo.amount}}</span>
+                        </div>
+                        <div class="received-desc">
+                            <span>— <span class="received-desc-text">好友开通乐花卡，可提现{{taskInfo.amount}}元</span> —</span>
+                        </div>
+                    </div>
+                </template>
+                <template v-else>
+                    <img class="received-bg" :src="imgSrc.countInfoBg">
+                    <!--好友帮赚-->
+                    <div class="count-info-content">
+                        <div class="count-info-amount">
+                            <span class="count-info-yen">&yen;</span>
+                            <span>{{countInfo.cashback_amount || 0}}</span>
+                        </div>
+                        <div class="count-info-desc">
+                            <span>今日</span>
+                            <span>预计 &yen;{{countInfo.today_friend_amount || 0}}</span>
+                        </div>
+                    </div>
+                </template>
+                <div class="count-info-bottom">
+                    <div class="count-info-btn-wrap">
+                        <img class="count-info-btn-img" @click="onShare" v-stat="'BTN_SHARE_GIF'"
+                         :src="taskInfo.task_status == taskStatusConfig.received ? (descInfo.share_btn_gif || imgSrc.shareBtnGif) : (descInfo.invite_btn_gif || imgSrc.inviteBtnGif)">
+                    </div>
+                    <div class="count-info-btm-link" v-href="'//m.fenqile.com/cps/bonus.html?type=friend'" v-stat="'LINK_TO_MY_BONUS'">查看我的返现</div>
+                </div>
+            </div>
+        </template>
+    </template>
+    
+    <!--邀请好友步骤-->
+    <section class="floor-wrap">
+        <div class="process-wrap">
+            <div class="title">{{stepInfo.title}}</div>
+            <div class="process-container">
+                <div class="process-item" v-for="item in stepInfo.content">
+                    <p v-for="step in item">{{step}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--好友指南-->
+    <section class="floor-wrap" v-if="tipsFloor.tips_info && tipsFloor.tips_info.length">
+        <div class="tips-wrap">
+            <div class="top-title">{{tipsFloor.title}}</div>
+            <div class="tips-item" v-for="tips in tipsFloor.tips_info">
+                <div>
+                    <p class="tips-title tips-title-btm">{{tips.title}}</p>
+                    <div class="desc">{{tips.desc}}</div>
+                    <img class="tips-img" :src="tips.img">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--意见反馈-->
+    <section class="floor-wrap">
+        <div class="tips-wrap">
+            <div class="top-title" v-if="serviceFloor.title">{{serviceFloor.title}}</div>
+            <div class="tips-item" v-for="tips in serviceFloor.tips_info">
+                <div>
+                    <p class="tips-title tips-title-btm" v-if="tips.title">{{tips.title}}</p>
+                    <div class="desc" v-for="desc in tips.desc">{{desc}}</div>
+                    <div>
+                        <img class="qrcode" :src="tips.img">
+                    </div>
+                    <div class="copy-btn" @click="setClipBoard(tips.weixin_name)" v-if="tips.weixin_name" v-stat="`BTN_COPY${isInApp ? '_APP' : '_H5'}`">“{{tips.weixin_name}}”复制去微信添加</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 分享 -->
+    <div class="dialog" v-if="isShowWxShareLayer" @click="isShowWxShareLayer=false" v-expose="'WEIXIN_SHARE_LAYER'">
+        <div class="dia-share">
+            <img :src="imgSrc.shareLayer" class="imgauto">
+        </div>
+    </div>
+    <!--领取红包动效 -->
+    <div class="receive-gif-dialog" v-if="isShowReceiveGif" :style="{'top': headHeight + 'px'}">
+        <div :class="['receive-gif-dia']">
+            <img class="imgauto" :src="imgSrc.receiveGif">
+            <!-- <img :src="imgSrc.shareLayer" class="imgauto"> -->
+        </div>
+    </div>
+</div>

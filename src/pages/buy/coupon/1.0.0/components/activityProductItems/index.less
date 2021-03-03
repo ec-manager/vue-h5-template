@@ -1,0 +1,194 @@
+@import '../../public/common.less';
+
+.sku-list {
+    /* 垂直版本商品展示 */
+    .vertical-sku-list {
+        .vertical-sku-item {
+            display: flex;
+            padding: 24px/@p 0;
+            &:not(:last-child) {
+                .half-border-btm(#EDEDEE);
+            }
+            .good-img {
+                img {
+                    width: 208px/@p;
+                    height: 208px/@p;
+                    border-radius: 16px/@p;
+                }
+            }
+            
+            .good-info {
+                flex: 1;
+                min-width: 0;
+                padding-left: 24px/@p;
+                .flex(v, jsb);
+                .good-item-top {
+                    .good-title {
+                        font-size: 24px/@p;
+                        color: #050C1C;
+                        font-weight: bold;
+                        img {
+                            width: 32px/@p;
+                            height: 32px/@p;
+                            vertical-align: middle;
+                            margin-right: 16px/@p;
+                        }
+                    }
+                    .good-cash-back {
+                        font-size: 22px/@p;
+                        color: #2F80F9;
+                        padding-top: 16px/@p;
+                        .flex(ae);
+                        img {
+                            width: 22px/@p;
+                            height: 22px/@p;
+                            margin-right: 3px/@p;
+                        }
+                        .sign {
+                            width: 18px/@p;
+                            padding-left: 2px/@p;
+                        }
+                        .cash-back-price {
+                            font-family: dinpro;
+                            font-size: 28px/@p;
+                        }
+                    }
+                }
+                .good-item-bottom {
+                    .flex(ac, jsb);
+                    .price-wrap {
+                        /deep/.coupon-price {
+                            font-size: 22px/@p;
+                            color: #FF3D77;
+                            .yuan {
+                                font-size: 32px/@p;
+                                padding: 0 4px/@p;
+                            }
+                            .price {
+                                font-family: dinpro;
+                                font-size: 44px/@p;
+                            }
+                            .price-float {
+                                font-family: dinpro;
+                                font-size: 32px/@p;
+                            }
+                        }
+                        .has-sold {
+                            font-family: PingFangSC-Regular;
+                            font-size: 24px/@p;
+                            color: #84888F;
+                            padding-top: 12px/@p;
+                            padding-bottom: 8px/@p;
+                        }
+                    }
+                    .buy-btn-wrap {
+                        .go-buy-btn {
+                            .flex(vm);
+                            min-width: 152px/@p;
+                            height: 58px/@p;
+                            background: linear-gradient(156deg, #FF7899 0%, #FF3D77 100%);
+                            font-size: 22px/@p;
+                            color: #ffffff;
+                            border-radius: 12px/@p;
+                        }
+                        .has-coupon-btn {
+                            .flex(v, vm);
+                            width: 152px/@p;
+                            height: 80px/@p;
+                            background: linear-gradient(156deg, #FF7899 0%, #FF3D77 100%);
+                            border-radius: 12px/@p;
+                            position: relative;
+                            &::before {
+                                content: '';
+                                position: absolute;
+                                left: -8px/@p;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                width: 16px/@p;
+                                height: 16px/@p;
+                                border-radius: 50%;
+                                background-color: #ffffff;
+                            }
+
+                            &::after {
+                                content: '';
+                                position: absolute;
+                                right: -8px/@p;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                width: 16px/@p;
+                                height: 16px/@p;
+                                border-radius: 50%;
+                                background-color: #ffffff;
+                            }
+
+                            p {
+                                .flex(v, vm);
+                                width: 100%;
+                                flex: 1;
+                                font-size: 22px/@p;
+                                color: #ffffff;
+                            }
+                            .coupon-price {
+                                position: relative;
+                                &::after {
+                                    content: '';
+                                    position: absolute;
+                                    bottom: 0;
+                                    left: 10px/@p;
+                                    right: 10px/@p;
+                                    border-top: 1px dashed rgba(255, 255, 255, .5);
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }
+    }
+
+    /* 水平版本商品展示 */
+    .horizontal-slu-list {
+        display: flex;
+        padding: 16px/@p 0;
+        .horizontal-sku-item {
+            width: 202px/@p;
+            margin-right: 16px/@p;
+            &:last-child {
+                margin-right: 0;
+            }
+            .good-img {
+                img {
+                    width: 176px/@p;
+                    height: 176px/@p;
+                    border-radius: 16px/@p;
+                }
+            }
+            .cash-back-wrap {
+                position: relative;
+                .flex(vm);
+                width: 100%;
+                height: 40px/@p;
+                background: #6695FF;
+                border-radius: 20px/@p;
+                margin-top: -16px/@p;
+                z-index: 1;
+                p {
+                    .flex(ae);
+                    font-size: 22px/@p;
+                    color: #ffffff;
+                }
+                .sign {
+                    font-size: 18px/@p;
+                    padding: 0 2px/@p 0 4px/@p;
+                }
+                .cash-price {
+                    font-family: dinpro;
+                    font-size: 28px/@p;
+                }
+            }
+        }
+    }
+}

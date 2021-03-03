@@ -1,0 +1,12 @@
+<div class="ad-list-wrap" :class="[customClass]">
+    <div class="ad-list" v-for="(item, adIndex) in list" :key="`ad_list_${adIndex}`">
+        <a class="ad-item" 
+            v-for="(ad, index) in item.cols" 
+            :key="'ad_item_' + index"
+            :style="{'height': ((item.height || 180) / 75) + 'rem'}"
+            @click="linkToCps(item.pic_list[index], adIndex, index)"
+         >
+            <img class="pro-img" v-lazy="item.pic_list[index] && item.pic_list[index].img" :key="'ad_img' + index" v-expose="`${hotTag}_${adIndex}_${index}`">
+        </a>
+    </div>
+</div>

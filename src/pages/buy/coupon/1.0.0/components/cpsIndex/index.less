@@ -1,0 +1,425 @@
+@import "~@/inc/sales/style/mixin/fn.less";
+
+.cps-index-wrap {
+    background-color: #e66329;
+    min-height: 100vh;
+    .cps-head-img-wrap {
+        position: relative;
+        width: 750px/@p;
+        height: 722px/@p;
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-position: top;
+        .cps-head-content {
+            .flex(vm);
+            padding-top: 3px/@p;
+            .logo {
+                flex-shrink: 0;
+            }
+            .search-bar-content {
+                flex: 1;
+                padding: 0 14px/@p 0 27px/@p;
+                .search-bar {
+                    background-color: rgba(255, 224, 224, .5);
+                    border-radius: 8px/@p;
+                    height: 56px/@p;
+                    padding-left: 25px/@p;
+                    .flex(ac);
+                    .search-icon {
+                        width: 36px/@p;
+                        height: 36px/@p;
+                        margin-right: 28px/@p;
+                    }
+                    .input-item {
+                        font-size: 22px/@p;
+                        color: #6f556c;
+                    }
+                }
+            }
+            .rule {
+                position: relative;
+                background: url('//cimg1.fenqile.com/product5/M00/3A/29/MtEHAF--Aa2AH8g1AAAXE2m93lw161.png') no-repeat center/100% 100%;
+                width: 149px/@p;
+                height: 57px/@p;
+                color: #ffffff;
+                font-size: 26px/@p;
+                padding-left: 31px/@p;
+                box-sizing: border-box;
+                margin-right: -50px/@p;
+                .flex(ac);
+                .hide-tap-highlight();
+            }
+        }
+
+        .title {
+            padding-top: 140px/@p;
+            /deep/.award-box {
+                width: 310px/@p;
+                box-sizing: border-box;
+                margin: 0 auto;
+                .swiper-container {
+                    height: 35px/@p;
+                    overflow: hidden;
+                    .swiper-img {
+                        height: 35px/@p;
+                    }
+                }
+                .swiper-wrapper {
+                    .flex(v);
+                }
+            }
+        }
+
+        .roll {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 36px/@p;
+        }
+    }
+    .floor-wrap {
+        padding: 0 30px/@p;
+        .floor-title {
+            .flex(vm);
+            height: 120px/@p;
+            font-size: 32px/@p;
+            font-weight: 900;
+            color: #ffffff;
+            &::after {
+                content: '';
+                display: inline-block;
+                width: 18px/@p;
+                height: 26px/@p;
+                margin-left: 14px/@p;
+                background: url('//cimg1.fenqile.com/product5/M00/36/32/MtEHAF-3mDyARDi_AAABPCT5rfE307.png') no-repeat center/contain;
+            }
+        }
+       
+    }
+    .card-wrap {
+        position: relative;
+        width: 100%;
+        height: 160px/@p;
+        margin-bottom: 9px/@p;
+        .card-img {
+            width: 100%;
+            height: 160px/@p;
+        }
+        .receive-btn {
+            position: absolute;
+            top: 8px/@p;
+            right: 40px/@p;
+            .hide-tap-highlight();
+        }
+        .scale-move {
+            animation: scaleMove 2.4s ease-in infinite;
+        }
+    }
+
+    .cps-activity-wrap {
+        width: 100%;
+        height: 509px/@p;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        padding: 14px/@p 14px/@p 28px/@p;
+        box-sizing: border-box;
+        overflow: hidden;
+        .banner {
+            width: 100%;
+            height: 109px/@p;
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 12px/@p 10px/@p 10px/@p 10px/@p;
+            }
+        }
+        .product-list {
+            padding-top: 7px/@p;
+            max-width: 100%;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 80px/@p;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            .flex();
+            .product-item {
+                width: 270px/@p;
+                height: 355px/@p;
+                background-color: #ffffff;
+                border-radius: 8px/@p;
+                margin-right: 6px/@p;
+                flex-shrink: 0;
+                .pro-info {
+                    padding: 0 18px/@p;
+                    box-sizing: border-box;
+                }
+                .img-wrap {
+                    position: relative;
+                    width: 100%;
+                    height: 230px/@p;
+                    margin-right: 6px/@p;
+                    .tag {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        .tag-content {
+                            .flex(ac);
+                            height: 40px/@p;
+                            line-height: 40px/@p;
+                            padding: 0 10px/@p;
+                            background: #FF3E77;
+                            border-radius: 8px/@p;
+                            font-size: 18px/@p;
+                            font-weight: 600;
+                            color: #ffffff;
+                        }
+                        img {
+                            width: 18px/@p;
+                            height: 18px/@p;
+                            margin-right: 2px/@p;
+                        }
+                    }
+                    .pro-img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 8px/@p;
+                    }
+                }
+                .title {
+                    font-size: 20px/@p;
+                    font-weight: 500;
+                    color: #333333;
+                    padding-top: 16px/@p;
+                }
+                .price-wrap {
+                    .amount {
+                        font-size: 28px/@p;
+                        font-weight: bold;
+                        color: #FF3E77;
+                        padding-top: 15px/@p;
+                        .coupon-price {
+                            font-size: 20px/@p;
+                            // color: #000000;
+                            font-weight: 500;
+                            padding-right: 10px/@p;
+                        }
+                    }
+                    .discount-wrap {
+                        font-size: 20px/@p;
+                        font-weight: bold;
+                        color: #427AEB;
+                        padding-top: 12px/@p;
+                        .flex(ac);
+                        .sign {
+                            padding-left: 6px/@p;
+                        }
+                        img {
+                            width: 20px/@p;
+                            height: 20px/@p;
+                        }
+                        .cash-back-price {
+                            font-size: 23px/@p;
+                            color: #467AF2;
+                        }
+                    }
+                }
+                .pre-sale-wrap {
+                    .pre-amount {
+                        font-size: 30px/@p;
+                        font-weight: bold;
+                        color: #FF3E77;
+                        padding-top: 20px/@p;
+                        .price-tip {
+                            font-size: 23px/@p;
+                            color: #000000;
+                            font-weight: 500;
+                            padding-right: 10px/@p;
+                        }
+                    }
+                    .fee-text {
+                        font-size: 22px/@p;
+                        font-weight: 500;
+                        color: #B1B3C0;
+                        line-height: 32px/@p;
+                        padding-top: 17px/@p;
+                    }
+                }
+            }
+        }
+    }
+
+    .lepay-banner {
+        padding: 30px/@p 30px/@p 0;
+        img {
+            width: 100%;
+            height: 180px/@p;
+            border-radius: 20px/@p;
+        }
+    }
+
+    .slot-bar {
+        height: 28px/@p;
+    }
+
+    .tab-list-wrap {
+        height: 93px/@p;
+    }
+ 
+    .tab-list {
+        padding: 6px/@p 16px/@p 16px/@p;
+        background: linear-gradient(0deg, #FD644F 0%, #FF7D2E 100%);
+        z-index: 99;
+        &.sticky {
+            position: fixed;
+            top: 88px/@p;
+            left: 0;
+        }
+        .flex(wrap);
+        width: 100%;
+        box-sizing: border-box;
+        .tab-item {
+            .flex(vm);
+            width: 20%;
+            height: 61px/@p;
+            font-size: 26px/@p;
+            font-weight: 500;
+            color: #ffffff;
+            .hide-tap-highlight();
+            margin-top: 10px/@p;
+        }
+        .tab-item-active {
+            border-radius: 10px/@p;
+            background: linear-gradient(0deg, #FFA525 0%, #FF954F 97%);
+        }
+    }
+
+    .product-wrap {
+        .banner {
+            padding: 30px/@p 24px/@p 0;
+            width: 100%;
+            box-sizing: border-box;
+            img {
+                width: 100%;
+                height: 180px/@p;
+                border-radius: 20px/@p;
+            }
+        }
+        /deep/.category-product-list-wrap {
+            padding-top: 31px/@p;
+        }
+    }
+
+    /**规则弹框*/
+    .dialog-bg {
+        .flex(vm);
+        position: relative;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .5);
+        .dialog-wrap {
+            border-radius: 20px/@p;
+            position: relative;
+            width: 631px/@p;
+            height: 995px/@p;
+            .dialog-container {
+                border-radius: 20px/@p;
+                position: relative;
+                width: 631px/@p;
+                height: 995px/@p;
+                overflow: scroll;
+                -webkit-overflow-scrolling: touch;
+                .dialog-rule-img {
+                    position: relative;
+                    width: 631px/@p;
+                }
+                .dialog-award-img {
+                    position: relative;
+                    width: 631px/@p;
+                }
+            }
+            .dialog-close-img {
+                position: absolute;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                -webkit-tap-highlight-color:transparent;
+                width: 100px/@p;
+                height: 100px/@p;
+                right: 1px/@p;
+                top: 1px/@p;
+            }
+            .close-btn {
+                position: absolute;
+                left: 50%;
+                bottom: -10px/@p;
+                transform: translateX(-50%);
+                width: 135px/@p;
+                height: 83px/@p;
+            }
+        }
+    }
+
+    /**领取成功弹框*/
+    .dialog-award-bg {
+        .flex(vm);
+        position: relative;
+        position: fixed;
+        z-index: 20;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .5);
+        .dialog-award-wrap {
+            border-radius: 20px/@p;
+            position: relative;
+            width: 631px/@p;
+            height: 595px/@p;
+            .dialog-award-container {
+                border-radius: 20px/@p;
+                position: relative;
+                width: 631px/@p;
+                height: 595px/@p;
+                overflow: scroll;
+                .dialog-award-img {
+                    position: relative;
+                    width: 631px/@p;
+                }
+            }
+        }
+    }
+    /**到底提示*/
+    .footer-tip {
+        .flex(vm);
+        height: 112px/@p;
+        line-height: 112px/@p;
+        font-size: 22px/@P;
+        color: #ffffff;
+    }
+}
+
+
+/**动画定义*/
+// 立即领取按钮
+@keyframes scaleMove {
+    0% {
+        transform: scale(1);
+    }
+    40% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    60% {
+        transform: scale(1);
+    }
+    80% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

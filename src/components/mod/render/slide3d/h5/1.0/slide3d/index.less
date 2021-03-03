@@ -1,0 +1,30 @@
+.slide3d {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    margin: 0 auto;
+    .slide-box {
+        position: relative;
+        transform-style: preserve-3d;
+        perspective: 500px;
+    }
+}
+
+.slide-pagination {
+    position: absolute;
+    bottom: 13px;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    -webkit-transition: .3s;
+            transition: .3s;
+    .bullet {
+        display: inline-block;
+        margin: 0 4px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #fff;
+    }
+}

@@ -1,0 +1,166 @@
+@import "~@/inc/sales/style/mixin/fn.less";
+
+.dinpro();
+
+.category-product-list-wrap {
+    .flex(wrap);
+    padding: 8px/@p 18px/@p 0;
+    .pro-item { 
+        width: 50%;
+        overflow: hidden;
+        padding: 0 6px/@p;
+        margin-bottom: 12px/@p;
+        box-sizing: border-box;
+        .pro-wrap {
+            display: block;
+            border-radius: 16px/@p;
+            background-color: #ffffff;
+            height: 100%;
+            .img-wrap {
+                position: relative;
+                font-size: 0;
+                height: 345px/@p;
+                .pro-img {
+                    width: 100%;
+                    border-radius: 16px/@p;
+                    height: 345px/@p;
+                }
+            }
+            .pro-info {
+                padding: 24px/@p 24px/@p 32px/@p;
+                .title {
+                    color: #050C1C;
+                    font-size: 24px/@p;
+                    line-height: 36px/@p;
+                    min-height: 72px/@p;
+                    display: flex;
+                    img {
+                        width: 34px/@p;
+                        height: 32px/@p;
+                        flex-shrink: 0;
+                        margin-right: 8px/@p;
+                        vertical-align: middle;
+                    }
+                }
+    
+                .price-wrap {
+                    padding-top: 18px/@p;
+                    /deep/.amount {
+                        color: #FF3D77;
+                        font-family: dinpro;
+                        .price {
+                            font-size: 42px/@p;
+                        }
+                        .yuan {
+                            font-size: 32px/@p;
+                            margin-right: 4px/@p;
+                        }
+                        .coupon_price {
+                            font-size: 22px/@p;
+                            margin-right: 4px/@p;
+                        }
+                        .price-float {
+                            font-size: 32px/@p;
+                        }
+                        .channel-tip {
+                            font-size: 20px/@p;
+                            color: #84888F;
+                            padding-left: 8px/@p;
+                            white-space: nowrap;
+                        }
+                        .promotion-info-wrap {
+                            .flex();
+                            padding-top: 20px/@p;
+                            .promotion-info-content {
+                                .flex(vm);
+                                background: linear-gradient(90deg, #FF668F 0%, #FF3D77 100%);
+                                border-radius: 6px/@p;
+                                height: 32px/@p;
+                                font-size: 18px/@p;
+                                font-weight: 500;
+                                color: #FFFFFF;
+                                flex-shrink: 0;
+                                padding: 0 8px/@p;
+                            }
+                            .promotion-icon {
+                                width: 24px/@p;
+                                height: 24px/@p;
+                                margin-right: 4px/@p;
+                            }
+                            .discount-wrap {
+                                .flex(vm);
+                                font-size: 0;
+                            }
+                            .promotion-tag {
+                                font-size: 18px/@p;
+                                font-weight: 500;
+                                color: #FFFFFF;
+                            }
+                            .sign {
+                                font-size: 20px/@p;
+                                color: #FFFFFF;
+                                padding: 0 4px/@p 0 8px/@p;
+                            }
+                            .cash-back-price {
+                                color: #FFFFFF;
+                                font-family: dinpro;
+                                font-size: 22px/@p;
+                            }
+
+                            .promotion-info-vip {
+                                background: linear-gradient(90deg, #D68D4D 0%, #A3490D 100%);
+                            }
+                        }
+                    }
+                    .presale_amount {
+                        color: #FF6A00;
+                        .amount-top {
+                            .presale-tip {
+                                font-size: 24px/@p;
+                                font-weight: 500;
+                            }
+                        }
+
+                        .amount-bottom {
+                            .flex();
+                            padding-top: 20px/@p;
+                            .presale-price {
+                                .flex(ac);
+                                height: 32px/@p;
+                                background: linear-gradient(156deg, #FFA666 0%, #FF6A00 100%);
+                                border-radius: 6px/@p;
+                                font-size: 18px/@p;
+                                font-weight: 500;
+                                color: #FFFFFF;
+                                flex-shrink: 0;
+                                padding: 0 8px/@p;
+                                span {
+                                    font-size: 22px/@p;
+                                    font-family: dinpro;
+                                    padding-left: 4px/@p;
+                                }    
+                            }
+                            .presale-promotion-tag {
+                                .flex(vm);
+                                flex-shrink: 0;
+                                border: 2px/@p solid #FFA666;
+                                border-radius: 6px/@p;
+                                height: 32px/@p;
+                                font-size: 18px/@p;
+                                font-weight: 500;
+                                color: #FF6A00;
+                                padding: 0 8px/@p;
+                                box-sizing: border-box;
+                                margin-left: 8px/@p;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+       
+    }
+    .fs-0 {
+        font-size: 0;
+    }
+}

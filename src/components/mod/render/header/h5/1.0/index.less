@@ -1,0 +1,61 @@
+@import '../../../../../inc/sales/style/mixin/fn.less';
+
+.is-web {
+    padding-top: 88px/@p;
+}
+
+.immersive-header {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    .flex(vm);
+    height: 88px/@p;
+    width: 750px/@p;
+    overflow: hidden;
+    z-index: 99;
+    background-color: #626BF9;
+    // transition: all 600ms;
+    .header-left {
+        width: 150px/@p;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 32px/@p;
+        padding-right: 32px/@p;
+        .header-left-icon{
+            width: 52px/@p;
+            height: 52px/@p;
+        }
+    }
+
+    .header-title {
+        .flex(vm);
+        flex: 1;
+        height: 100%;
+        font-size: 34px/@p;
+        color: #ffffff;
+        font-weight: 500;
+        min-width: 0;
+        padding: 0 10px/@p;
+    }
+
+    .header-right {
+        width: 150px/@p;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-left: 32px/@p;
+        padding-right: 32px/@p;
+        font-size: 28px/@p;
+        color: #ffffff;
+    }
+}
+
+
+.hide-ios-tap {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color:transparent;  
+}

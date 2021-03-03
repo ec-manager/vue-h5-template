@@ -1,0 +1,18 @@
+<div>
+    <div class="tab-head">
+        <swiper  class="swiper-wrapper" :options="swiperOption" v-if="headList.length > 0" ref="swiper" :style="customStyle">
+            <swiper-slide class="swiper-slide" v-for="(item,index) in headList" :key="index" :class="value == index ? 'on':''" @click.native="handleClick(index)">
+                <slot name="head" :list="item">
+                    <a href="javascript:;" class="title">
+                        <p>{{item.title}}</p>
+                        <p>{{item.subTitle}}</p>
+                    </a>
+                </slot>
+            </swiper-slide>
+        </swiper>
+    </div>
+
+    <div class="tab-pane">
+        <slot name="default"></slot>
+    </div>
+</div>

@@ -12,12 +12,16 @@ export default {
     assetsOutputPath: {
         // root单独抽离，防止干扰publicPath
         root: 'res',
-        js: 'js/bd',
-        lib: 'js/lib',
+        js: 'js/biz',
+        lib: 'js/vd',
         css: 'css',
         html: 'pages'
     },
     alias: {
         'vue$': 'vue/dist/vue.esm.js'
-    }
+    },
+    extraBabelPlugins: [
+        // 添加 ...[1, 2]这种调用方式
+        '@babel/plugin-transform-spread'
+    ]
 }

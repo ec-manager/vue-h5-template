@@ -1,0 +1,16 @@
+<div class="slide3d">
+    <!-- 高度为盒子的高度减40是为了pagination -->
+    <div class="slide-box">
+        <slot></slot>
+    </div>
+
+    <!-- pagination 活动的那个加active 类 -->
+    <div class="slide-pagination" v-if="isShowPagination">
+        <span
+            class="bullet"
+            v-for="index in count"
+            :class="(index - 1) === currentIndex ? 'active': ''"
+            :key="'bullet' + index"
+            :style="(index - 1) === currentIndex ? activeBackground : basicBackground"></span>
+    </div>
+</div>

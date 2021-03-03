@@ -1,0 +1,105 @@
+<div>
+    <lazy-component @show="getProductList">
+        <div :class="[getProductClass, wrapClass]" v-if="isFinshed" v-expose="pid">
+            <ul class="sales-pro-list">
+                <li class="seckill-pro-item" v-for="product in skuList" :key="product.skuId" @click="getProductDetailUrl(product.saleType, product.skuId)" v-stat="{'hottag':`${pid}_${product.skuId}`,'skuId':product.skuId}">
+                    <a href="javascript:;" class="pro-wrap">
+                        <slot name="default" :product="product" :extraInfo="extraInfo" :addCart="addCart">
+                            <div class="pro-img-wrap">
+                                <slot name="image" :product="product">
+                                    <img v-lazy="product.goodsImg" class="imgauto">
+                                </slot>
+
+                                <slot name="tag" :product="product" :addCart="addCart">
+                                    <template v-if="product.activeInfo.activeStatus">
+                                        <span class="seckill-status pre" v-if="product.activeInfo.activeStatus ==1">即将开始</span>
+                                        <span class="seckill-status running" v-else-if="product.activeInfo.activeStatus == 2">火热秒杀中</span>
+                                        <span class="seckill-status out" v-else>秒杀结束</span>
+                                        <span class="seckill-price">
+                                            <span>秒杀价</span>
+                                            <span>&yen;<span class="num">{{product.activeInfo.activeAmount}}</span></span>
+                                        </span>
+                                    </template>
+                                    <template v-else>
+                                        <span class="seckill-status out">秒杀结束</span>
+                                    </template>
+                                </slot>
+                                <slot name="discount" :discount="extraInfo.maxDiscount ? extraInfo.maxDiscount[product.skuId]: null"></slot>
+                            </div>
+                            <div class="pro-info">
+                                <div class="pro-info-top">
+                                    <slot name="title" :product="product">
+                                        <p class="pro-name">{{product.goodsName}}</p>
+                                    </slot>
+
+                                    <slot name="desc" :product="product">
+                                        <p class="pro-name" v-if="cols == 1">{{product.goodsDesc}}</p>
+                                    </slot>
+
+                                    <slot name="label" :product="product"></slot>
+                                </div>
+
+                                <div class="pro-info-btm">
+                                    <slot name="price" :product="product">
+                                        <template v-if="product.activeInfo.activeStatus">
+                                            <p class="pro-price" v-if="product.activeInfo.activeStatus == 1">
+                                                <span class="amount line-through">&yen;<span class="num">{{product.amount}}</span></span>
+                                                <span class="storage">限量{{product.activeInfo.activeLimitNum}}件</span>
+                                            </p>
+                                            <p class="pro-price" v-else-if="product.activeInfo.activeStatus == 2">
+                                                <span class="storage">仅剩{{product.activeInfo.activeLeftNum}}件</span>
+                                                <span class="old-amount">&yen;{{product.martAmount}}</span>
+                                            </p>
+                                            <p class="pro-price" v-else>
+                                                <span class="amount">活动价：&yen;<span class="num">{{product.realAmount}}</span></span>
+                                            </p>
+                                        </template>
+                                        <template v-else>
+                                            <p class="pro-price">
+                                                <span class="amount">活动价：&yen;<span class="num">{{product.realAmount}}</span></span>
+                                            </p>
+                                        </template>
+                                    </slot>
+
+                                    <slot name="button" :product="product">
+                                        <template v-if="product.activeInfo.activeStatus">
+                                            <p class="buy-btn" v-if="product.activeInfo.activeStatus ==1">现价购买</p>
+                                            <p class="buy-btn" v-else-if="product.activeInfo.activeStatus ==2">月供&yen;{{product.monPay}}起</p>
+                                            <p class="buy-btn" v-else>活动价购买</p>
+                                        </template>
+                                        <template v-else>
+                                            <p class="buy-btn">活动价购买</p>
+                                        </template>
+                                    </slot>
+                                </div>
+                            </div>
+                        </slot>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </lazy-component>
+
+    <div class="seckill-pro" :class="getProductClass" v-if="!isFinshed">
+        <ul class="sales-pro-list" :data-num="skuNum">
+            <li v-for="product in skuNum" :key="product">
+                <a href="javascript:;" class="pro-wrap">
+                    <div class="pro-img-wrap">
+                        <img src="//cres2.fenqile.cn/sale/img/core/h5/default.png" class="imgauto">
+                    </div>
+                    <div class="pro-info">
+                        <div class="pro-info-top">
+                            <p class="pro-name"></p>
+                            <p class="pro-name" v-if="cols == 1"></p>
+                        </div>
+
+                        <div class="pro-info-btm">
+                            <p class="pro-price"></p>
+                            <p class="buy-btn" style="background-color:white;"></p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

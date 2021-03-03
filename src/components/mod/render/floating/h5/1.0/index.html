@@ -1,0 +1,7 @@
+<div class="float-wrap" v-if="src">
+    <slot name="default">
+        <a href="javascript:;" v-stat="stat" @click="handleClick">
+            <img :src="src" class="imgauto"/>
+        </a>
+    </slot>
+</div>

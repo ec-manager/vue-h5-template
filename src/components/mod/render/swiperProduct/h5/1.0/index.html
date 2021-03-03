@@ -1,0 +1,75 @@
+<div>
+    <lazy-component @show="getProductList">
+        <div :class="wrapClass" v-if="isFinshed" v-expose="pid">
+            <swiper class="sales-pro-list" :options="swiperOption" v-if="skuList.length > 0">
+                <swiper-slide class="swiper-pro-item sales-pro-item" v-for="(product, index) in skuList" :key="product.skuId">
+                    <a href="javascript:;" class="pro-wrap" @click="getProductDetailUrl(product.saleType, product.skuId)" v-stat="{'hottag':`${pid}_${product.skuId}`,'skuId':product.skuId}">
+                        <slot name="default" :product="product" :addCart="addCart" :num="index">
+                            <div class="pro-img-wrap">
+                                <slot name="image" :product="product">
+                                    <img v-lazy="product.goodsImg" class="imgauto">
+                                </slot>
+
+                                <slot name="tag" :product="product"></slot>
+
+                                <slot name="discount" :discount="extraInfo.maxDiscount ? extraInfo.maxDiscount[product.skuId]: null"></slot>
+                            </div>
+
+                            <div class="pro-info">
+                                <div class="pro-info-top">
+                                    <slot name="title" :product="product">
+                                        <p class="pro-name">{{product.goodsName}}</p>
+                                    </slot>
+
+                                    <slot name="desc" :product="product"></slot>
+
+                                    <slot name="label" :product="product"></slot>
+                                </div>
+
+                                <div class="pro-info-btm">
+                                    <slot name="price">
+                                        <p class="pro-price">
+                                            <span class="amount">&yen;<span class="num">{{product.realAmount}}</span></span>
+                                            <span class="old-amount" v-if="product.martAmount > product.realAmount">&yen;{{product.martAmount}}</span>
+                                        </p>
+                                    </slot>
+
+                                    <slot name="button" :product="product">
+                                        <p class="mon-pay">月供<span class="num">&nbsp;&yen;{{product.monPay}}</span>&nbsp;起</p>
+                                    </slot>
+                                </div>
+                            </div>
+                        </slot>
+                    </a>
+                </swiper-slide>
+            </swiper>
+        </div>
+    </lazy-component>
+
+    <div class="sales-more-pro sales-pro" v-if="!isFinshed">
+        <swiper  class="sales-pro-list" :options="swiperOption" :data-num="skuNum">
+            <swiper-slide class="swiper-pro-item sales-pro-item" v-for="item in skuNum" :key="item">
+                <a href="javascript:;" class="pro-wrap" >
+                    <div class="pro-img-wrap">
+                        <img src="//cres2.fenqile.cn/sale/img/core/h5/default.png" class="imgauto">
+                    </div>
+
+                    <div class="pro-info">
+                        <div class="pro-info-top">
+                            <p class="pro-name"></p>
+                        </div>
+
+                        <div class="pro-info-btm">
+                            <p class="pro-price">
+                                <span class="amount"></span>
+                                <span class="old-amount"></span>
+                            </p>
+
+                            <p class="mon-pay" style="background-color:white;border-top:none;"></p>
+                        </div>
+                    </div>
+                </a>
+            </swiper-slide>
+        </swiper >
+    </div>
+</div>

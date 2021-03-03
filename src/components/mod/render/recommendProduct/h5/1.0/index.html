@@ -1,0 +1,33 @@
+<div class="category-product-list-wrap" :class="[customClass]">
+    <div class="pro-item"
+        v-for="(cps_product, cps_index) in list" 
+        :key="'cps_product_' + cps_product.sku_id"  
+        @click="clickSku(cps_product)" 
+        v-stat="{'hottag':`${hotTag}_${cps_product.sku_id}`,'skuId':cps_product.sku_id}"
+    >
+        <a href="javascript:;" class="pro-wrap">
+            <div class="img-wrap">
+                <img class="pro-img" v-lazy="cps_product.sku_pic && cps_product.sku_pic[0]" />
+            </div>
+            <div class="pro-info">    
+                <h3 class="title">
+                    <div class="text-of-two"><img v-lazy="cps_product.channel_icon" :key="'channel_icon'"/>{{cps_product.product_name}}</div>
+                </h3>
+                <div class="price-wrap">
+                    <!--预售样式-->
+                    <div class="amount presale_amount" v-if="cps_product.presale_info && cps_product.presale_info.prepay_price">
+                        <div class="amount-left">
+                            <span v-html="handlePrice(cps_product.presale_info.prepay_price || 0)"></span>
+                        </div>
+                        <span class="presale_price" v-if="cps_product.presale_info.presale_deposit">预售定金 &yen;{{cps_product.presale_info.presale_deposit}}</span>
+                    </div>
+                    <!--普通样式-->
+                    <div class="amount" v-else>
+                        <span class="coupon_price" v-if="cps_product.has_coupon == 1">券后价</span><span v-html="handlePrice(cps_product.coupon_price || 0)"></span>
+                    </div>
+                    <div class="discount-wrap" v-if="cps_product.user_rebate"><img v-lazy="imgSrc.lehua">返现<span class="sign">&yen;</span><span class="cash-back-price">{{cps_product.user_rebate || 0}}</span></div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

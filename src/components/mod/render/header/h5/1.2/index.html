@@ -1,0 +1,18 @@
+ <div>
+    <!--非app环境内头部-->
+    <div class="immersive-header" ref="immersive_header" :style="{'background-color': isTransformColor ? transformBgColor : bgColor, 'padding-top': isInApp ? statusBarHeight : 0}">
+        <div class="header-left hide-ios-tap" @click="leftBtnClick" v-stat="'BTN_RETURN_BACK'">
+            <img class="header-left-icon" :src="tool.addDomain(isTransformColor ? transformArrowIcon : arrowIcon)">
+        </div>
+        <div class="header-title text-of" :style="{'color': isTransformColor ? transformTextColor : textColor}">
+            {{title}}
+            <slot name="title"></slot>
+        </div>
+        <div class="header-right hide-ios-tap" @click="rightBtnCallBack" v-stat="stat">
+            <slot>
+                <span class="g-right" :style="{'color': isTransformColor ? transformTextColor : textColor}">{{content}}</span>
+            </slot>
+        </div>
+    </div>
+    <div class="slot-bg" :style="{'background-color': slotBgColor, 'padding-top': isInApp ? statusBarHeight : 0}" v-if="needSlot"></div>
+ </div>

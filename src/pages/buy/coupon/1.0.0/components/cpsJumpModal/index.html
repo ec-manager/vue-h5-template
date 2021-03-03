@@ -1,0 +1,21 @@
+<div class="mask" v-if="show" v-expose="'MASK_CPS_JUMP_BOX'">
+    <div class="mask-content">
+        <img class="box-gif" :src="imgSrc.jumpHeadGif"></img>
+        <div class="icon-wrap">
+            <img class="channel-icon" :src="imgSrc.fenqileIcon" key="fql_icon"></img>
+            <img class="jump-icon" :src="imgSrc.jumpIcon" key="jump_icon"></img>
+            <img class="channel-icon" :src="icon" key="channel_icon"></img>
+        </div>
+        <div class="line-wrap">
+            <span class="dashed-line"></span>
+            <span class="channel-text">正在跳转{{name}}</span>
+            <span class="dashed-line"></span>
+        </div>
+    
+        <div class="discount-wrap" v-if="tip">
+            <div class="discount-left">
+                <span class="font-24">{{tip}}</span>
+            </div>
+        </div>
+    </div>
+</div>

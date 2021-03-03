@@ -6,7 +6,12 @@ export default {
   },
   scripts: [{
     chunks: "vendor",
-    src: "/res/js/lib/vendor.js"
+    src: "/res/js/vd/vendor.js"
+  }],
+  links: [{
+    chunks: "vendor",
+    href: "/res/css/vendor.css",
+    rel: "stylesheet"
   }],
   headScripts: []
 };

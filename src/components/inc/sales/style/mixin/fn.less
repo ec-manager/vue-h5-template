@@ -1,0 +1,341 @@
+/* 固定宽度div水平居中 */
+.margin-auto(){
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* 文字溢出隐藏 */
+.text-of(){
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 单行或多行文字超出点点点 */
+.text-of-more(@num:1){
+    overflow:hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: @num;
+    line-clamp: @num;
+    /*! autoprefixer: off */
+    -webkit-box-orient: vertical;
+    /*! autoprefixer: on */
+    box-orient: vertical;
+    display:-webkit-box;
+    display:box;
+}
+
+/* flex布局组合 */
+.flex(@arg...){
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+
+    // 设置水平方向为主轴（默认值）
+    .mixin(h) {
+        /*! autoprefixer: off */
+        -webkit-box-orient: vertical;
+        /*! autoprefixer: on */
+        -webkit-flex-direction: row;
+        flex-direction: row;
+    }
+
+    // 设置垂直方向为主轴，起点默认在上沿
+    .mixin(v) {
+        /*! autoprefixer: off */
+        -webkit-box-orient: vertical;
+        /*! autoprefixer: on */
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+
+    // 垂直方向为主轴，且起点在下沿
+    .mixin(reverse) {
+        -webkit-box-direction: reverse;
+        -webkit-flex-direction: column-reverse;
+        flex-direction: column-reverse;
+    }
+
+    // 可换行排列
+    .mixin(wrap) {
+        -webkit-box-lines: multiple;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    // 在主轴方向上居中对齐
+    .mixin(jc){
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    // 在主轴方向上向起点对齐
+    .mixin(js){
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        justify-content: flex-start;
+    }
+
+    // 在主轴方向上向终点对齐
+    .mixin(je){
+        -webkit-box-pack: end;
+        -webkit-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+
+    // 在主轴方向上两端对齐（各项目之间留空白）
+    .mixin(jsb){
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+    }    
+    
+    .mixin(jse){
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-evenly;
+        justify-content: space-evenly;
+    }
+
+    // 各项目之前、之间、之后都留有空白
+    .mixin(jsa){
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+        &::before,
+        &::after{
+            content: '';
+            display: block;
+        }
+    }
+
+    // 在侧轴方向上居中放置
+    .mixin(ac){
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    // 在侧轴方向起点位置对齐
+    .mixin(as){
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+    }
+
+    // 在侧轴方向终点位置对齐
+    .mixin(ae){
+        -webkit-box-align: end;
+        -webkit-align-items: flex-end;
+        align-items: flex-end;
+    }
+
+    // vm主轴侧轴同时居中
+    .mixin(vm){
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    //循环参数输出对应mixin
+    .loop(@i) when (@i > 0) {
+        .loop((@i - 1));
+        .mixin(extract(@arg, @i));
+    }
+
+    .loop(length(@arguments));
+}
+
+.size(@w, @h: @w){
+    width: @w;
+    height: @h;
+}
+
+/* 伸缩性 */
+.fx(@num: 1){
+    -webkit-box-flex: @num;
+    -webkit-flex: @num;
+    flex: @num;
+}
+
+/* 图片自适应 */
+.imgauto(){
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* 图片变灰 */
+.imggray(){
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: gray;
+}
+
+/* 清除浮动 */
+.fn-clear(){
+    zoom: 1;
+    &:after{
+        display: block;
+        visibility: hidden;
+        clear: both;
+        height: 0;
+        content: '.';
+    }
+}
+
+/* 三角形，包括直角 */
+.triangle(@width, @color, @direction) {
+    @default-border-style: solid;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border-width: @width;
+    border-style: @default-border-style;
+    border-color: transparent;
+    .simulater () when (@direction = top) {
+        border-bottom-color: @color;
+    }
+    .simulater () when (@direction = right) {
+        border-left-color: @color;
+    }
+    .simulater () when (@direction = bottom) {
+        border-top-color: @color;
+    }
+    .simulater () when (@direction = left) {
+        border-right-color: @color;
+    }
+    .simulater () when (@direction = topleft) {
+        border-top-color: @color;
+        border-left-color: @color;
+    }
+    .simulater () when (@direction = topright) {
+        border-top-color: @color;
+        border-right-color: @color;
+    }
+    .simulater () when (@direction = bottomleft) {
+        border-bottom-color: @color;
+        border-left-color: @color;
+    }
+    .simulater () when (@direction = bottomright) {
+        border-bottom-color: @color;
+        border-right-color: @color;
+    }
+    .simulater();
+}
+
+/* 常用箭头（边框） */
+.arrow-bd(down,@width,@border-width,@color){
+    display: inline-block;
+    width: @width;
+    height: @width;
+    border-width: @border-width;
+    border-style: solid;
+    border-color: transparent transparent @color @color;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+}
+.arrow-bd(up,@width,@border-width,@color){
+    display: inline-block;
+    width: @width;
+    height: @width;
+    border-width: @border-width;
+    border-style: solid;
+    border-color: @color @color transparent transparent;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+}
+.arrow-bd(left,@width,@border-width,@color){
+    display: inline-block;
+    width: @width;
+    height: @width;
+    border-width: @border-width;
+    border-style: solid;
+    border-color: transparent transparent @color @color ;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+}
+.arrow-bd(right,@width,@border-width,@color){
+    display: inline-block;
+    width: @width;
+    height: @width;
+    border-width: @border-width;
+    border-style: solid;
+    border-color: @color @color transparent transparent;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+}
+/* 0.5边框 */
+/* 注意, 如果边框不显示, 请尝试在元素中设置z-index */
+.half-border(@color,@bg-color,@border-radius) {
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: -50%;
+        bottom: -50%;
+        left: -50%;
+        right: -50%;
+        transform: scale(0.5);
+        border: 2px/@p solid @color;
+        background-color: @bg-color;
+        border-radius: @border-radius;
+    }
+}
+.half-border-btm(@color) {
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        bottom: 0;
+        left: -50%;
+        right: -50%;
+        height: 2px/@p;
+        transform: scale(0.5);
+        background-color: @color;
+    }
+}
+.half-border-top(@color) {
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -50%;
+        right: -50%;
+        height: 2px/@p;
+        transform: scale(0.5);
+        background-color: @color;
+    }
+}
+
+@p: 75px/1rem;
+@P: 75px/1rem;
+@q: 37.5px/1rem; /* 对齐1倍图的设计稿, 方便重构 */
+
+/* 隐藏点击的阴影 */
+.hide-tap-highlight(){
+    -webkit-tab-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 公共字体-dinpro，仅支持 0123456789,.& 字符 */
+.dinpro(){
+    @font-face {
+        font-weight: normal;
+        font-style: normal;
+        font-family: 'dinpro';
+      
+        src: url('//cres.fenqile.cn/sales/spark/font/dinpro.eot');
+        src: url('//cres.fenqile.cn/sales/spark/font/dinpro.eot?#font-spider') format('embedded-opentype'),
+            url('//cres.fenqile.cn/sales/spark/font/dinpro.ttf') format('truetype'),
+            url('//cres.fenqile.cn/sales/spark/font/dinpro.woff') format('woff'),
+            url('//cres.fenqile.cn/sales/spark/font/dinpro.svg') format('svg');
+    }
+}

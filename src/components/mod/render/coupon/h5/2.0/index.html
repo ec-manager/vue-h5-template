@@ -1,0 +1,15 @@
+<ul v-if="Object.keys(couponInfo) !== 0">
+    <template v-for="couponId in cidList">
+        <template v-if="couponInfo[couponId]">
+            <coupon-item
+                :coupon-info="couponInfo[couponId]"
+                :is-login="isLogin"
+                :cid="couponId"
+                v-for="(item,index) in couponInfo[couponId].discount"
+                :key="couponId + index"
+                :item="item"
+                @success="handleSuccess">
+            </coupon-item>
+        </template>
+    </template>
+</ul>

@@ -1,0 +1,64 @@
+@import "~@/inc/sales/style/mixin/fn.less";
+
+.swiper-nav{
+    padding-right: 36px;
+    .tips{
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        width: 100%;
+        padding-left: 36px/@p;
+        opacity: 0;
+        box-sizing: border-box;
+        pointer-events: none;
+        line-height: 36px;
+        color: #3c6e96;
+    }
+    .swiper-slide{
+        display: block;
+        width: 25%;
+        font-size: 14px;
+        text-align: center;
+        line-height: 36px;
+        color: #3c6e96;
+    }
+    .on{
+        color: #fff;
+    }
+    .toggle-btn{
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        width: 36px;
+        height: 36px;
+        &::after{
+            position: absolute;
+            top: 10px;
+            left: 13px;
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: transparent transparent #3c6e96 #3c6e96;
+            transition: transform .4s;
+            transform: rotate(-45deg);
+        }
+    }
+    &.open{
+        .swiper-container{
+            position: absolute;
+            bottom: 36px;
+            width: 100%;
+        }
+        /deep/.swiper-wrapper{
+            -webkit-box-lines: multiple;
+            flex-wrap: wrap;
+        }
+        .toggle-btn::after{
+            transform: translateY(6px) rotate(135deg);
+        }
+        .tips{opacity: 1;}
+    }
+}

@@ -1,0 +1,104 @@
+@import "~@/inc/sales/style/mixin/fn.less";
+
+.dinpro();
+
+.category-product-list-wrap {
+    .flex(wrap);
+    padding: 8px/@p 18px/@p 0;
+    .pro-item { 
+        width: 50%;
+        overflow: hidden;
+        padding: 0 6px/@p;
+        margin-bottom: 12px/@p;
+        box-sizing: border-box;
+        .pro-wrap {
+            display: block;
+            border-radius: 16px/@p;
+            background-color: #ffffff;
+            height: 100%;
+            .img-wrap {
+                position: relative;
+                font-size: 0;
+                height: 345px/@p;
+                .pro-img {
+                    width: 100%;
+                    border-radius: 16px/@p;
+                    height: 345px/@p;
+                }
+            }
+            .pro-info {
+                padding: 24px/@p 24px/@p 32px/@p;
+                .title {
+                    color: #050C1C;
+                    font-size: 24px/@p;
+                    line-height: 36px/@p;
+                    min-height: 72px/@p;
+                    display: flex;
+                    img {
+                        width: 34px/@p;
+                        height: 32px/@p;
+                        flex-shrink: 0;
+                        margin-right: 8px/@p;
+                        vertical-align: middle;
+                    }
+                }
+    
+                .price-wrap {
+                    padding-top: 18px/@p;
+                    /deep/.amount {
+                        font-family: dinpro;
+                        font-size: 44px/@p;
+                        color: #FF3D77;
+                        .yuan {
+                            font-size: 32px/@p;
+                            margin-right: 4px/@p;
+                        }
+                        .coupon_price {
+                            font-size: 22px/@p;
+                            margin-right: 4px/@p;
+                        }
+                        .price-float {
+                            font-size: 32px/@p;
+                        }
+                    }
+                    .presale_amount {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: flex-end;
+                        color: #FF6A00;
+                        // overflow: hidden;
+                        .amount-left {
+                            flex-shrink: 0;
+                        }
+                        .presale_price {
+                            flex-shrink: 0;
+                            font-size: 18px/@p;
+                            line-height: 22px/@p;
+                        }
+                    }
+                    .discount-wrap {
+                        .flex(ae);
+                        font-size: 22px/@p;
+                        color: #2F80F9;
+                        padding-top: 18px/@p;
+                        img {
+                            width: 22px/@p;
+                            height: 22px/@p;
+                            margin-right: 3px/@p;
+                        }
+                        .sign {
+                            width: 18px/@p;
+                            padding-left: 2px/@p;
+                        }
+                        .cash-back-price {
+                            font-family: dinpro;
+                            font-size: 28px/@p;
+                        }
+                    }
+                }
+            }
+        }
+       
+    }
+}

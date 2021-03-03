@@ -1,0 +1,30 @@
+@import '../../../../../inc/sales/style/mixin/fn.less';
+
+.tab-head {
+    overflow: hidden;
+    /deep/.swiper-wrapper {
+        width: 100%;
+        height: 100%;
+        display: -webkit-box;
+    }
+
+    .swiper-slide {
+        .flex(vm);
+        color: #000;
+        font-size: 12px;
+        font-weight: bold;
+        box-sizing: border-box;
+        text-align: center;
+        flex-direction: row;
+
+        &:nth-last-child(-n+4):first-child,
+        &:nth-last-child(-n+4):first-child~.swiper-slide {
+            -webkit-box-flex: 1;
+        }
+
+        >.title {
+            display: block;
+            line-height: 1.2;
+        }
+    }
+}

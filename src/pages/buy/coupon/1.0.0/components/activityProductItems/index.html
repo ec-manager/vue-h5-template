@@ -1,0 +1,41 @@
+<div class="sku-list">
+    <!-- 垂直版本 -->
+    <div class="vertical-sku-list" v-if="layoutType == 1">
+        <div class="vertical-sku-item" v-for="(sku, sku_index) in displayList" :key="'activity_sku' + sku_index" @click="getProductDetailUrl(channelId, sku)" v-stat="{'hottag':`VERTICAL_${sku.sku_id}`,'skuId':sku.sku_id}" v-if="sku">
+            <div class="good-img">
+                <img v-lazy="sku.sku_pic && sku.sku_pic[0]" class="imgauto" />
+            </div>
+            <div class="good-info">
+                <div class="good-item-top">
+                    <div class="good-title text-of"><img v-lazy="channelIcon[channelId + '']" :key="'channel_' + channelId"/>{{sku.product_name}}</div>
+                    <div class="good-cash-back" v-if="sku.user_rebate"><img v-lazy="lehuaIcon">返现<span class="sign">&yen;</span><span class="cash-back-price">{{sku.user_rebate || 0}}</span></div>
+                </div>
+                <div class="good-item-bottom">
+                    <div class="price-wrap">
+                        <div class="coupon-price"><span v-if="sku.has_coupon == 1">券后价</span><span v-html="handlePrice(sku.coupon_price || 0)"></span></div>
+                        <!-- 暂不显示已售 -->
+                        <div class="has-sold" v-if="sku.sale_num && false">已售{{sku.sale_num}}件</div>
+                    </div>
+                    <div class="buy-btn-wrap">
+                        <div class="has-coupon-btn" v-if="sku.has_coupon == 1">
+                            <p class="coupon-price">&yen;{{sku.coupon_info && sku.coupon_info.coupon_amount ? sku.coupon_info.coupon_amount : 0 }}券</p>
+                            <p>领券下单</p>
+                        </div>
+                        <div class="go-buy-btn" v-else>立即下单</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 水平版本 -->
+    <div class="horizontal-slu-list" v-if="layoutType == 2">
+        <div class="horizontal-sku-item" v-for="(sku, sku_index) in displayList" :key="'activity_sku' + sku_index" @click="getProductDetailUrl(channelId, sku)" v-stat="{'hottag':`HORIZONTAL_${sku.sku_id}`,'skuId':sku.sku_id}" v-if="sku">
+            <div class="good-img">
+                <img v-lazy="sku.sku_pic && sku.sku_pic[0]" class="imgauto" :key="sku.sku_id"/>
+            </div>
+            <div class="cash-back-wrap">
+                <p>返<span class="sign">&yen;</span><span class="cash-price">{{sku.user_rebate || 0}}</span></p> 
+            </div>
+        </div>
+    </div>
+</div>

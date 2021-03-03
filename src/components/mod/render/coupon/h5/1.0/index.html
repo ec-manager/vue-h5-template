@@ -1,0 +1,13 @@
+<div class="custom-coupon" :class="'custom-coupon-' + couponInfo.cellNum">
+    <ul>
+        <coupon-item
+            :coupon-info="couponInfo"
+            :is-login="isLogin"
+            v-for="(item,index) in couponInfo.discount"
+            :key="index"
+            :item="item"
+            @success="handleSucess()"
+        >
+    </coupon-item>
+    </ul>
+</div>

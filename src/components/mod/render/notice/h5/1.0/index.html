@@ -1,0 +1,5 @@
+<div class="body">
+    <div v-if="showNotice">
+        <component :is="noticeType" v-bind="noticeData" :t_custom_style="t_custom_style" @noticeAction="noticeAction"></component>
+    </div>
+</div>

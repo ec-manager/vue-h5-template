@@ -1,0 +1,261 @@
+@import '../../../../../inc/sales/style/mixin/fn.less';
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'din';
+    src: url('~@/mod/public/20190901/main/font/din2.eot');
+    src: url('~@/mod/public/20190901/main/font/din2.eot?#font-spider') format('embedded-opentype'),
+    url('~@/mod/public/20190901/main/font/din2.ttf') format('truetype'),
+    url('~@/mod/public/20190901/main/font/din2.woff') format('woff'),
+    url('~@/mod/public/20190901/main/font/din2.svg') format('svg');
+}
+
+.coup-row {
+    .flex(wrap);
+    padding: 0 12px/@p;
+    box-sizing: border-box;
+    .mask-coup {
+        padding: 0 3px/@p;
+        margin-bottom: 6px/@p;
+        box-sizing: border-box;
+    }
+
+    .mask-coup-2 {
+        width: 50%;
+    }
+
+    .mask-coup-3 {
+        width: 33.3%;
+    }
+
+    .mask-coup-4 {
+        width: 25%;
+    }
+
+    .coupon-item {
+        box-sizing: border-box;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 14px/@p 22px/@p;
+        color: #ffffff;
+        background-color: #4f34db;
+
+        .coupon-valid-date {
+            font-family: 'din';
+            width: 100%;
+            height: 20px/@p;
+            line-height: 20px/@p;
+            font-size: 20px/@p;
+            opacity: 0.6;
+            .text-of();
+            text-align: center;
+        }
+
+        .coupon-money-flag {
+            font-family: 'din';
+            font-size: 44px/@p;
+        }
+
+        .coupon-num {
+            font-family: 'din';
+            font-size: 92px/@p;
+            line-height: 92px/@p;
+        }
+
+        .coupon-desc {
+            font-weight: 500;
+            font-size: 20px/@p;
+            height: 40px/@p;
+            line-height: 20px/@p;
+            width: 100%;
+            text-align: center;
+        }
+
+        .coupon-btn{
+            font-weight: 500;
+            background-color: #F80E2D;
+            height: 50px/@p;
+            .flex(vm);
+            color: #fff;
+            font-size: 24px/@p;
+            border-radius: 25px/@p;
+            text-align: center;
+            box-shadow: 0px 3px 8px 1px
+                rgba(44, 23, 156, 0.24);
+        }
+    }
+
+    .mask-coup-2 {
+        .coupon-btn{
+            width: 246px/@p;
+        }
+
+        .coupon-desc {
+            .text-of();
+        }
+    }
+
+    .mask-coup-3 {
+        .coupon-btn{
+            width: 208px/@p;
+        }
+
+        .coupon-desc {
+            .text-of();
+        }
+    }
+
+    .mask-coup-4 {
+        .coupon-btn{
+            width: 158px/@p;
+        }
+
+        .coupon-desc{
+            width: 100%;
+            height: 44px/@p;
+            line-height: 22px/@p;
+            .text-of-more(2);
+        }
+    }
+
+    .out {
+        .coupon-item {
+            position: relative;
+            &::after {
+                position: absolute;
+                right: 3px/@p;
+                top: 0;
+                z-index: -1;
+                content: '';
+                width: 67px/@p;
+                height: 63px/@p;
+                background: url(./img/coup_get.png) no-repeat center / cover;
+            }
+        }
+    }
+
+    .over {
+        .coupon-item {
+            position: relative;
+            &::after {
+                position: absolute;
+                right: 3px/@p;
+                top: 0;
+                z-index: -1;
+                content: '';
+                width: 67px/@p;
+                height: 63px/@p;
+                background: url(./img/coup_over.png) no-repeat center / cover;
+            }
+        }
+    }
+}
+
+.coup-row-1{
+    width: 100%;
+    padding: 0 12px/@p;
+    height: 210px/@p;
+    box-sizing: border-box;
+    margin-bottom: 10px/@p;
+    color: #fff;
+    &:nth-child(n+2) {
+        margin-top: 13px/@p;
+    }
+    .coupon-item {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+        .coup-left {
+            box-sizing: border-box;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding-top: 20px/@p;
+            padding-left: 44px/@p;
+            .coupon-money-flag {
+                font-family: 'din';
+                font-size: 72px/@p;
+                line-height: 72px/@p;
+            }
+
+            .coupon-num {
+                font-family: 'din';
+                height: 86px/@p;
+                font-size: 127px/@p;
+            }
+
+            .coupon-desc {
+                height: 20px/@p;
+                font-size: 20px/@p;
+                font-weight:500;
+                .text-of();
+                max-width: 200px/@p;
+                top: 4px/@p;
+                left: 20px/@p;
+                position: relative;
+            }
+        }
+        .coup-right {
+            width: 50%;
+            display: flex;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 20px/@p;
+            .coupon-btn {
+                box-sizing: border-box;
+                width: 260px/@p;
+                height: 72px/@p;
+                line-height: 72px/@p;
+                text-align: center;
+                box-shadow: 0px 3px 8px 1px rgba(44, 23, 156, 0.24);
+                border-radius: 36px/@p;
+                background-color: #e35e0d;
+            }
+
+            .coupon-valid-date {
+                height: 20px/@p;
+                max-width: 260px/@p;
+                font-size: 20px/@p;
+                font-weight:500;
+                .text-of();
+                line-height: 20px/@p;
+                top: 30px/@p;
+                position: relative;
+            }
+        }
+    }
+
+    &.out {
+        position: relative;
+        &::after {
+            position: absolute;
+            right: 12px/@p;
+            top: 0;
+            z-index: 1;
+            content: '';
+            width: 67px/@p;
+            height: 63px/@p;
+            background: url(./img/coup_get.png) no-repeat center / cover;
+        }
+    }
+
+    &.over {
+        position: relative;
+        &::after {
+            position: absolute;
+            right: 12px/@p;
+            top: 0;
+            z-index: 1;
+            content: '';
+            width: 67px/@p;
+            height: 63px/@p;
+            background: url(./img/coup_over.png) no-repeat center / cover;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+@import "../../../../../inc/sales/style/mixin/fn.less";
+// 秒杀状态
+.leka-info {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 46px/@p;
+    line-height: 46px/@p;
+    padding: 0 14px/@p 0 45px/@p;
+    background: #eedbbd url('../img/lehei.png') no-repeat 14px/@p center;
+    background-size: 22px/@p 14px/@p;
+    color: #424242;
+    z-index: 2;
+    border-radius: 0 0 5px/@p 0;
+}
+
+// 外层容器+图片
+.img-link-wrap {
+    .flex(vm);
+    flex-shrink: 0;
+    box-sizing: border-box;
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}

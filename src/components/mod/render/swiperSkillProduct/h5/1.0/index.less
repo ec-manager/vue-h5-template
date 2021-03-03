@@ -1,0 +1,51 @@
+@import '../../../../../inc/sales/style/h5/1.0/product.less';
+
+h3 {
+    padding: 30px/@p 0 20px/@p;
+    color: #d44a42;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    em {
+        margin-left: 10px/@p;
+        font-size: 12px;
+        opacity: .85;
+    }
+}
+
+// 1行多列商品
+.seckill-more-pro {
+    overflow: hidden;
+    .sales-pro-list {
+        padding: 0 2*@pro_space_outside;
+
+        .flex();
+        .sales-pro-item {
+            flex-shrink: 0;
+        }
+    }
+    .pro-wrap {
+        // 商品图片
+        .pro-img-wrap {
+            padding-top: 30px/@p;
+            padding-bottom: 10px/@p;
+            // 图片
+            img {
+                height: 223px/@p;
+            }
+        }
+        // 商品信息
+        .pro-info {
+            padding: 0 @pro_space_inside @pro_space_inside;
+            // 商品名
+            .pro-name {
+                height: 34px;
+                .text-of-more(2);
+            }
+        }
+    }
+}
+
+.seckill-more-pro /deep/ .swiper-wrapper{
+    .flex();
+}

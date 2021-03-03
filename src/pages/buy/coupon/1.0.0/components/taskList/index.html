@@ -1,0 +1,27 @@
+<section class="floor-wrap" v-if="list.length > 0">
+    <div class="floor-container">
+        <div class="floor-title">
+            <div class="text-of">{{title}}</div> 
+        </div>
+        <!-- 加多一层的目的是为了隐藏ios的滚动条 -->
+        <div class="task-scroll-bar">
+            <div class="task-list-wrap">
+                <div class="task-item-wrap" v-for="(task, index) in list" :key="'task'+index" :style="{'color': taskSkin[index%taskSkinLen].normal, 'background': taskSkin[index%taskSkinLen].bgBackground}">
+                    <div class="task-title">{{task.title}}</div>
+                    <div class="task-desc">{{task.content}}</div>
+                    <div class="task-item-bottom">
+                        <div class="cash-back-amount"><span>+</span><span>&yen;{{task.amount}}</span></div>
+                        <div class="task-status-btn" :style="{'background': taskSkin[index%taskSkinLen].btnBackground}">
+                            <template v-if="task.is_progress == 1">
+                                <span class="process-bar"><span class="process" :style="{'width': task.progress + '%'}"></span></span>
+                                <span class="process-txt">{{task.progress}}%</span>
+                            </template>
+                            <span v-else-if="btnText[task.state + '']">{{btnText[task.state + '']}}</span>
+                            <span v-else-if="task.state == taskState.notStarted" @click="addUserTask(task, index)" v-stat="'CREATE_USER_TASK_' + index" v-expose="'CREATE_USER_TASK_' + index">去完成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

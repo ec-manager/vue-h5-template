@@ -1,0 +1,34 @@
+<div>
+    <template v-if="isTemplateEvent">
+        <template v-for="couponId in cidList">
+            <coupon-template
+                v-if="couponInfo[couponId]"
+                :coupon-info="couponInfo[couponId]"
+                :is-login="isLogin"
+                :cid="couponId"
+                :list="getDiscountData(couponInfo[couponId].discount)"
+                :options="options"
+                @success="handleSuccess">
+            </coupon-template>
+        </template>
+    </template>
+
+    <template v-else>
+        <ul>
+            <template v-for="couponId in cidList">
+                <template v-if="couponInfo[couponId]">
+                    <coupon-item
+                        :coupon-info="couponInfo[couponId]"
+                        :is-login="isLogin"
+                        :cid="couponId"
+                        v-for="(item,index) in getDiscountData(couponInfo[couponId].discount)"
+                        :key="couponId + index"
+                        :item="item"
+                        @success="handleSuccess">
+                    </coupon-item>
+                </template>
+            </template>
+        </ul>
+    </template>
+</div>
+

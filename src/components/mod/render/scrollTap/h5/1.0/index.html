@@ -1,0 +1,12 @@
+<div :class="navClass" ref="scrollTapElm">
+    <swiper ref="swiperNav" :options="swiperOption" :class="lockSwiper">
+        <a class="swiper-slide" v-for="(item, index) of realNavList" :key="index"
+            v-stat="`${realStat[index]}`" :href="`${floorSaveID[index]}`">
+            <slot name="nav" :nav="item">{{item}}</slot>
+        </a>
+    </swiper>
+    <template v-if="isShowBtnFlag">
+        <div ref="showMoreNavBtn" class="toggle-btn"></div>
+        <p class="tips">{{toggleTips}}</p>
+    </template>
+</div>

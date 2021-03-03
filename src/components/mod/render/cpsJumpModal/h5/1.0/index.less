@@ -1,0 +1,76 @@
+@import "~@/inc/sales/style/mixin/fn.less";
+
+ /*自动跳转弹窗样式*/
+ .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 100;
+    .flex(vm);
+    .mask-content {
+        position: relative;
+        width: 530px/@p;
+        background-color: #ffffff;
+        border-radius: 8px/@p;
+        padding-bottom: 24px/@p;
+        .box-gif {
+            width: 530px/@p;
+            height: 12px/@p;
+            margin-bottom: 52px/@p;
+        }
+    }
+   
+    .discount-wrap {
+        .flex(jsb, ac);
+        padding-top: 24px/@p;
+        padding-left: 56px/@p;
+        padding-right: 52px/@p;
+        .discount-left {
+            flex: 1;
+            .flex(vm);
+        }
+        .discount-icon {
+            width: 34px/@p;
+            height: 34px/@p;
+            margin-right: 14px/@p;
+        }    
+        .font-24 {
+            font-size: 28px/@p;
+            color: #383838;
+            letter-spacing: 2px/@p;
+        }
+    }
+
+    
+    .icon-wrap {
+        .flex(vm);
+        .channel-icon {
+            width: 108px/@p;
+            height: 108px/@p;
+        }
+        
+        .jump-icon {
+            width: 130px/@p;
+            height: 18px/@p;
+            margin-left: 28px/@p;
+            margin-right: 28px/@p;
+        }
+    }
+
+    .line-wrap {
+        .flex(ac);
+        padding-top: 40px/@p;
+        .dashed-line {
+            flex: 1;
+            border-top: 1px dashed #cacaca;
+        }
+        .channel-text {
+            font-size: 22px/@p;
+            color: #cacaca;
+            padding: 0 13px/@p;
+        }
+    }
+}

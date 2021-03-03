@@ -1,0 +1,303 @@
+@import '../../mixin/fn.less';
+
+// 公共商品组件样式
+// 颜色
+@red_color: #d44a42;
+@lighter_red_color: #e7807e;
+@gray_btn_color: #9e9e9e;
+@black_text_color: #474747;
+@gray_amount_color: #bcbcbc;
+@white_color: #fff;
+@pink_color: #ed2f57;
+@border_color: #e8e8e8;
+
+// 字号
+@font_size_smaller: 8px;
+@font_size_small: 10px;
+@font_size_middle: 12px;
+@font_size_large: 14px;
+@font_size_larger: 16px;
+
+// 字重
+@font_weight_bold: 700;
+
+// 商品之间边距
+@pro_space_outside: 6px/@p;
+// 商品内部信息边距
+@pro_space_inside: 20px/@p;
+// 通用按钮圆角
+@common_border_radius: 5px/@p;
+
+// 商品公共样式
+.sales-pro {
+    // 商品列表
+    .sales-pro-list {
+        // 列表项
+        .sales-pro-item, li {
+            box-sizing: border-box;
+            &.swiper-pro-item {
+                width: 30%;
+            }
+        }
+    }
+    // 链接容器
+    .pro-wrap {
+        display: block;
+        background-color: @white_color;
+        color: @black_text_color;
+        font-size: @font_size_middle;
+        // 商品图片
+        .pro-img-wrap {
+            position: relative;
+
+            .flex(jc, ac);
+
+            // 乐黑卡tag
+            .lehei-tag {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: inline-block;
+                overflow: hidden;
+                box-sizing: border-box;
+                padding: 2px/@p 15px/@p 0 60px/@p;
+                max-width: 100%;
+                height: 46px/@p;
+                border-bottom-right-radius: @common_border_radius;
+                background-color: #eedbbd;
+                line-height: 46px/@p;
+                &::before {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 60px/@p;
+                    height: 100%;
+                    background: url(./img/lehei-tag.png) no-repeat center;
+                    background-size: 32px/@p 25px/@p;
+                    content: '';
+                }
+            }
+            // 促销标签自下向上排列
+            .promotion-tag {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                overflow: hidden;
+                padding: 0 15px/@p;
+                max-width: 100%;
+                height: 40px/@p;
+                border-radius: 0 20px/@p 20px/@p 0;
+                background-color: @red_color;
+                color: @white_color;
+                font-size: @font_size_small;
+                line-height: 40px/@p;
+                // 促销值
+                .num {
+                    font-size: @font_size_middle;
+                }
+            }
+            .promotion-tag1 {
+                bottom: 0;
+                background-color: @red_color;
+            }
+            .promotion-tag2 {
+                bottom: 45px/@p;
+                background-color: @lighter_red_color;
+            }
+            .promotion-tag3 {
+                bottom: 90px/@p;
+                background-color: #f1a3a2;
+            }
+        }
+
+        // 商品信息
+        .pro-info {
+            // 商品名
+            .pro-name {
+                word-break: break-all;
+                & + .pro-name {
+                    margin-top: 10px/@p;
+                }
+            }
+            // 商品标签
+            .pro-tag-list {
+                overflow: hidden;
+                margin-top: 10px/@p;
+                height: 14px;
+                font-size: 10px;
+                .flex(h);
+                .pro-tag {
+                    padding: 0 3px;
+                    height: 14px;
+                    background-color: #e6d5d4;
+                    color: @red_color;
+                    line-height: 14px;
+                    & + .pro-tag {
+                        margin-left: @pro_space_outside;
+                    }
+                }
+            }
+            // 商品价格
+            .pro-price {
+                overflow: hidden;
+                word-break: break-all;
+                .flex(ae);
+                // 划线价
+                .old-amount {
+                    color: @gray_amount_color;
+                    text-decoration: line-through;
+                    font-size: @font_size_small;
+                }
+            }
+            // 月供
+            .mon-pay {
+                word-break: break-all;
+                text-align: center;
+                .text-of();
+            }
+        }
+    }
+}
+
+// 秒杀商品公共样式
+.seckill-pro {
+    // 商品列表
+    .sales-pro-list {
+        // 列表项
+        .sales-pro-item, li {
+            box-sizing: border-box;
+            &.swiper-pro-item {
+                width: 302px/@p;
+            }
+        }
+    }
+    // 链接容器
+    .pro-wrap {
+        display: block;
+        background-color: @white_color;
+        color: @black_text_color;
+        font-size: @font_size_middle;
+        // 商品图片
+        .pro-img-wrap {
+            position: relative;
+
+            .flex(jc, ac);
+
+            // 秒杀状态
+            .seckill-status {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 0 8px/@p;
+                height: 38px/@p;
+                border-bottom-right-radius: @common_border_radius;
+                color: @white_color;
+                line-height: 38px/@p;
+                // 秒杀未开始
+                &.pre {
+                    background-color: @gray_btn_color;
+                }
+                // 秒杀中且有库存
+                &.running {
+                    background-color: @red_color;
+                }
+                // 秒杀中无库存或秒杀已结束
+                &.out {
+                    background-color: @gray_btn_color;
+                }
+            }
+            // 秒杀价
+            .seckill-price {
+                position: absolute;
+                right: 14px/@p;
+                bottom: 0;
+                overflow: hidden;
+                width: 106px/@p;
+                height: 106px/@p;
+                border-radius: 50%;
+                background-color: @pink_color;
+                background-image: linear-gradient(45deg,
+                #ed2f57 0%,
+                #ff5384 50%,
+                #ed2f4e 100%);
+                color: @white_color;
+                font-size: @font_size_small;
+                .flex(jc, ac, v);
+                 > span {
+                    word-break: break-all;
+
+                    .text-of-more(1);
+                }
+
+                // 促销值
+                .num {
+                    font-size: @font_size_large;
+                }
+            }
+        }
+
+        // 商品信息
+        .pro-info {
+            // 商品名
+            .pro-name {
+                word-break: break-all;
+                line-height: 1.4;
+                & + .pro-name {
+                    margin-top: 10px/@p;
+                }
+            }
+            // 商品价格
+            .pro-price {
+                overflow: hidden;
+                margin-top: 10px/@p;
+                height: 36px/@p;
+                line-height: 1.2;
+
+                .flex(jsb,ae);
+                // 划线价
+                .old-amount {
+                    max-width: 100%;
+                    color: @gray_amount_color;
+                    text-decoration: line-through;
+                    word-break: break-all;
+                    font-size: @font_size_small;
+                    .text-of-more(1);
+                }
+                // 库存
+                .storage {
+                    max-width: 100%;
+                    color: @pink_color;
+                    word-break: break-all;
+
+                    .text-of-more(1);
+                }
+                // 活动价 实际价
+                .amount {
+                    max-width: 100%;
+                    word-break: break-all;
+
+                    .text-of-more(1);
+                    &.line-through {
+                        text-decoration: line-through;
+                    }
+                    .num {
+                        font-weight: @font_weight_bold;
+                        font-size: @font_size_larger;
+                    }
+                }
+            }
+            // 购买按钮
+            .buy-btn {
+                margin-top: 18px/@p;
+                height: 50px/@p;
+                border-radius: @common_border_radius;
+                background-color: @red_color;
+                color: @white_color;
+                word-break: break-all;
+                line-height: 50px/@p;
+                .text-of();
+                text-align:center;
+            }
+        }
+    }
+}

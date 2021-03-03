@@ -1,0 +1,80 @@
+<div>
+    <!-- 非限时抢券 -->
+    <template v-if="couponInfo.limitTimeType != 10">
+        <div class="coup-row" v-if="couponInfo.cellNum > 1">
+            <template v-for="(item,index) in list">
+                <div v-if="item.couponId" :class="'mask-coup-' + couponInfo.cellNum" class="mask-coup" :key="item.couponId" @click="getCoupunEvent(item.couponId, couponInfo.sceneId, couponInfo.discountStatus[item.couponId], couponInfo.discountInfo[item.couponId].link)">
+                    <div class="coupon-item" :style="{'background-color': couponInfo.discount.globalConfig.couponBgColor}">
+                        <p class="coupon-valid-date" :style="{'color': couponInfo.discount.globalConfig.amountColor}">{{item.validityDate}}</p>
+                        <div :style="{'color': couponInfo.discount.globalConfig.amountColor}">
+                            <span class="coupon-money-flag">&yen;</span><span class="coupon-num">{{item.amount}}</span>
+                        </div>
+                        <div class="coupon-desc" :style="{'color': couponInfo.discount.globalConfig.amountColor}">{{item.reductionText}}</div>
+                        <div class="coupon-btn" :style="{'color': couponInfo.discount.globalConfig.hadButtonTextColor, 'background-color': couponInfo.discount.globalConfig.hadButtonColor }" v-if="couponInfo.discountStatus[item.couponId] == 3">已领取</div>
+                        <div class="coupon-btn" :style="{'background-color': couponInfo.discount.globalConfig.buttonColor}" v-else>立即领</div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <template v-else>
+            <!--  一行一列 -->
+            <div v-for="(item,index) in list" class="coup-row-1">
+                <div v-if="item.couponId" class="coupon-item" :key="item.couponId" :style="{'background-color': couponInfo.discount.globalConfig.couponBgColor}" @click="getCoupunEvent(item.couponId, couponInfo.sceneId, couponInfo.discountStatus[item.couponId], couponInfo.discountInfo[item.couponId].link)">
+                    <div class="coup-left">
+                        <div :style="{'color': couponInfo.discount.globalConfig.amountColor}">
+                            <span class="coupon-money-flag">&yen;</span><span class="coupon-num">{{item.amount}}</span>
+                        </div>
+                        <p class="coupon-desc" :style="{'color': couponInfo.discount.globalConfig.amountColor}">{{item.reductionText}}</p>
+                    </div>
+                    <div class="coup-right">
+                        <div class="coupon-btn" :style="{'color': couponInfo.discount.globalConfig.hadButtonTextColor, 'background-color': couponInfo.discount.globalConfig.hadButtonColor }" v-if="couponInfo.discountStatus[item.couponId] == 3">已领取</div>
+                        <div class="coupon-btn" :style="{'background-color': couponInfo.discount.globalConfig.buttonColor}" v-else>立即领</div>
+                        <p class="coupon-valid-date" :style="{'color': couponInfo.discount.globalConfig.amountColor}">{{item.validityDate}}</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+
+    <template v-else>
+        <!-- 抢券 -->
+        <div class="coup-row" v-if="couponInfo.cellNum > 1">
+            <template v-for="(item,index) in list">
+                <div :class="['mask-coup-' + couponInfo.cellNum, couponInfo.discountStatus[item.couponId] == 3 ? 'out': '', couponInfo.discountStatus[item.couponId] == 4? 'over': '']" class="mask-coup" :key="item.couponId" @click="getCoupunEvent(item.couponId, couponInfo.sceneId, couponInfo.discountStatus[item.couponId], couponInfo.discountInfo[item.couponId].link)">
+                    <div v-if="item.couponId" class="coupon-item" :style="{'background-color': (couponInfo.discountStatus[item.couponId] == 1 || couponInfo.discountStatus[item.couponId] == 4)? '#d6d6d6' : couponInfo.discount.globalConfig.couponBgColor}">
+                        <p class="coupon-valid-date" :style="{'color': couponInfo.discount.globalConfig.amountColor}">{{item.validityDate}}</p>
+                        <div :style="{'color': couponInfo.discount.globalConfig.amountColor}">
+                            <span class="coupon-money-flag">&yen;</span><span class="coupon-num">{{item.amount}}</span>
+                        </div>
+                        <div class="coupon-desc" :style="{'color': couponInfo.discount.globalConfig.amountColor}">{{item.reductionText}}</div>
+                        <div class="coupon-btn" :style="{'background-color': couponInfo.discount.globalConfig.buttonColor }" v-if="couponInfo.discountStatus[item.couponId] == 1">先逛逛</div>
+                        <div class="coupon-btn" :style="{'background-color': couponInfo.discount.globalConfig.buttonColor }" v-else-if="couponInfo.discountStatus[item.couponId] == 2">立即领</div>
+                        <div class="coupon-btn" :style="{'color': couponInfo.discount.globalConfig.useButtonTextColor, 'background-color': couponInfo.discount.globalConfig.useButtonColor }" v-else-if="couponInfo.discountStatus[item.couponId] == 3">去使用</div>
+                        <div class="coupon-btn" :style="{'background-color': couponInfo.discount.globalConfig.buttonColor }" v-else>去逛逛</div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <template v-else>
+            <div v-for="(item,index) in list" class="coup-row-1" :class="[couponInfo.discountStatus[item.couponId] == 3 ? 'out': '', couponInfo.discountStatus[item.couponId] == 4? 'over': '']">
+                <div v-if="item.couponId" class="coupon-item" :key="item.couponId" :style="{'background-color': (couponInfo.discountStatus[item.couponId] == 1 || couponInfo.discountStatus[item.couponId] == 4)? '#d6d6d6' : couponInfo.discount.globalConfig.couponBgColor}" @click="getCoupunEvent(item.couponId, couponInfo.sceneId, couponInfo.discountStatus[item.couponId], couponInfo.discountInfo[item.couponId].link)">
+                    <div class="coup-left">
+                        <div :style="{'color': couponInfo.discount.globalConfig.amountColor}">
+                            <span class="coupon-money-flag">&yen;</span><span class="coupon-num">{{item.amount}}</span>
+                        </div>
+                        <p class="coupon-desc" :style="{'color': couponInfo.discount.globalConfig.amountColor}">{{item.reductionText}}</p>
+                    </div>
+                    <div class="coup-right">
+                        <div class="coupon-btn" :style="{'background-color': couponInfo.discount.globalConfig.buttonColor }" v-if="couponInfo.discountStatus[item.couponId] == 1">先逛逛</div>
+                        <div class="coupon-btn" :style="{'background-color': couponInfo.discount.globalConfig.buttonColor }" v-else-if="couponInfo.discountStatus[item.couponId] == 2">立即领</div>
+                        <div class="coupon-btn" :style="{'color': couponInfo.discount.globalConfig.useButtonTextColor, 'background-color': couponInfo.discount.globalConfig.useButtonColor }" v-else-if="couponInfo.discountStatus[item.couponId] == 3">去使用</div>
+                        <div class="coupon-btn" :style="{'background-color': couponInfo.discount.globalConfig.buttonColor }" v-else>去逛逛</div>
+                        <p class="coupon-valid-date" :style="{'color': couponInfo.discount.globalConfig.amountColor}">{{item.validityDate}}</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+</div>

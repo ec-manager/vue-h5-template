@@ -1,0 +1,176 @@
+<div class="cps-index-wrap" :style="{'background': themeColor}" v-if="Object.keys(config).length">
+    <!-- 头部背景图 -->
+    <div class="cps-head-img-wrap" :style="{'backgroundImage': 'url('+ bgImg.url +')', 'height': tool.toRem(bgImg.height)}" ref="head_img">
+        <div class="cps-head-content">
+            <img :src="logo.img" class="logo" alt="logo" :style="{'width': tool.toRem(logo.width), 'height': tool.toRem(logo.height)}">
+            <!-- 头部搜索框 -->
+            <div class="search-bar-content">
+                <div class="search-bar" @click="toCpsSearch('')" v-stat="htType + '_LINK_TO_CPS_SEARCH'">
+                    <img :src="searchBar.icon" class="search-icon">
+                    <span class="input-item">{{searchBar.placeholder}}</span>
+                </div>
+            </div>
+            <div class="rule" @click="isShowRulesDialog = true;" v-stat="htType + '_BTN_RULE'">规则</div>
+        </div>
+        <div class="title">
+            <div class="award-box">
+                <swiper :options="awardOptions">
+                    <div class="swiper-slide swiper-no-swiping swiper-item"
+                        v-for="(item, index) in awardList"
+                        :key="index">
+                        <img :src="item" class="swiper-img" alt="">
+                    </div>
+                </swiper>
+            </div>
+        </div>
+        <div class="roll">
+            <!-- 轮播弹幕[[ -->
+            <marquee v-if="rollInfo && rollInfo.list && rollInfo.list.length > 0" :data="rollInfo.list" :speed="rollInfo.speed"></marquee>
+            <!-- 轮播弹幕]] -->
+        </div>
+    </div>
+
+    <!-- 福利楼层[[ -->
+    <section class="floor-wrap" v-if="awardFloor.is_show && (awardFloor.ad_info.length > 0 || quotaCardDetail.isShow)">
+        <div class="floor-title">{{awardFloor.title}}</div>
+        <!-- 乐花卡[[ -->
+        <div class="card-wrap" v-if="quotaCardDetail.isShow">
+            <img class="card-img" :src="cardInfo.card_img" alt="">
+            <div class="receive-btn" 
+                :class="{'scale-move': quotaCardDetail.hasPrivilege == 0}" 
+                :style="{'width': tool.toRem(cardInfo.width)}"
+                @click="receivePrivilegeCard"
+            >
+                <img :src="cardInfo[quotaCardDetail.hasPrivilege == 0 ? 'receive_btn' : 'disabled_receive_btn']" alt="" class="imgauto">
+            </div>
+        </div>
+        <!-- 乐花卡]] -->
+        <ad-list :list="awardFloor.ad_info" :hotTag="htType + '_LINK_TO_RECEIVE_AWARD'" @linkToCps="linkToCps"></ad-list>
+    </section>
+    <!-- 福利楼层]] -->
+
+    <!-- 会场楼层[[ -->
+    <section class="floor-wrap" v-if="venueFloor.is_show && venueFloor.ad_info.length > 0">
+        <div class="floor-title">{{venueFloor.title}}</div>
+        <ad-list :list="venueFloor.ad_info" :hotTag="htType + '_LINK_TO_VENUE'" @linkToCps="linkToCps"></ad-list>
+    </section>
+    <!-- 会场楼层]] -->
+   
+    <!-- 商品list楼层[[ -->
+    <section class="floor-wrap" v-for="(productItem, index) in productFloor" :key="'product_floor_' + index">
+        <div class="floor-title">{{productItem.title}}</div>
+        <div class="cps-activity-wrap" :style="{'backgroundImage': 'url(' + (productItem.bg_img ? productItem.bg_img : imgSrc.productDefaultBg) + ')'}">
+            <div class="banner" v-if="productItem.banner"  @click="linkToCps(productItem.banner, htType + '_PRODUCT_BANNER_LINK_TO_CPS_' + index)">
+                <img v-lazy="productItem.banner.img" alt="" class="imgauto" :key="'product_item_' + index">
+            </div>
+            <div class="product-list">
+                <div class="product-item" 
+                    v-for="(product, pIndex) in productItem.product_list" 
+                    :key="'product_' + pIndex"
+                    @click="getProductDetailUrl(product, productItem.sku_info.channel)"
+                    v-stat="{'hottag':`${htType}_PRODUCT_FLOOR_${index}_${product.sku_id}`,'skuId': product.sku_id}"
+                >
+                    <div class="img-wrap">
+                        <img class="pro-img" v-lazy="product.sku_pic && product.sku_pic[0]" :key="'sku_pic_' + index + '_' + pIndex"/>
+                        <div class="tag">
+                            <template v-if="product.presale_info && Object.keys(product.presale_info).length">
+                                <div class="tag-content">
+                                    <img :src="imgSrc.whiteLehua"><span>返现</span><span class="sign">&yen;</span><span class="cash-back-price">{{product.user_rebate || 0}}</span>
+                                </div>
+                            </template>
+                            <div class="tag-content" v-else-if="productTag[product.sku_id]">{{productTag[product.sku_id]}}</div>
+                        </div>
+                    </div>
+                    <div class="pro-info">
+                        <h3 class="title text-of">{{product.product_name}}</h3>
+                        <div class="pre-sale-wrap" v-if="product.presale_info && Object.keys(product.presale_info).length">
+                            <div class="pre-amount"><span class="price-tip">预售价</span><span>&yen;{{product.presale_info.prepay_price || 0}}</span></div>
+                            <div class="fee-text" v-if="product.presale_info.presale_discount_fee_text">{{product.presale_info.presale_discount_fee_text}}</div>
+                        </div>
+                        <div class="price-wrap" v-else>
+                            <div class="amount"><span class="coupon-price">双12价</span><span>&yen;{{product.coupon_price || 0}}</span></div>
+                            <div class="discount-wrap" v-if="product.user_rebate"><img v-lazy="imgSrc.lehua">返现<span class="sign">&yen;</span><span class="cash-back-price">{{product.user_rebate || 0}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 商品list楼层]] -->
+
+    <!-- 乐花卡banner楼层[[ -->
+    <div class="lepay-banner" v-if="lepayBannerFloor.is_show">
+        <a v-href="lepayBannerFloor.link" v-stat="htType + '_BANNER_LINK_TO_LEPAY_AC'">
+            <img v-lazy="lepayBannerFloor.bg_img" alt="">
+        </a>
+    </div>
+    <!-- 乐花卡banner楼层]] -->
+
+    <!-- 占位 -->
+    <div class="slot-bar"></div>
+
+    <!-- 长尾商品tablist[[ -->
+    <section class="tab-list-wrap" :style="{'height': tool.toRem(tabHeight)}" ref="tabList">
+        <div class="tab-list" :class="{'sticky': needSticked}" :style="{'top': headHeight + 'px', 'background': tabListColor.bg}">
+            <div class="tab-item" 
+                :class="{'tab-item-active': index == currentTab}"
+                :style="{'background': index == currentTab ? tabListColor.tab_item_active : ''}"
+                v-for="(tab, index) in tabList"
+                @click="selectTab(index)"
+            >{{tab.title}}</div>
+        </div>
+    </section>
+    <!-- 长尾商品tablist]] -->
+
+    <!-- 长尾商品[[ -->
+    <section class="product-wrap">
+        <div class="banner" v-if="tabList[currentTab] && tabList[currentTab].banner && tabList[currentTab].banner.img">
+            <img v-lazy="tabList[currentTab].banner.img" alt="" :key="'tab_list_' + currentTab" @click="linkToCps(tabList[currentTab].banner, htType + '_IMG_TAB_BANNER_LINK_TO_CPS_' + currentTab)">
+        </div>
+        <recommend-product
+            :hotTag="htType + '_PROMOTE_RECOMMEND_' + currentTab"
+            v-bind="recommendConfig"
+            @clickSku="getProductDetailUrl"
+        ></recommend-product>
+    </section>
+    <!-- 长尾商品]] -->
+
+    <!-- 到底提示 -->
+    <section class="footer-tip">{{isLastPage ? '已经到底了' : '正在加载中...'}}</section>
+
+    <!-- floating[[ -->
+    <floating
+    :src="tool.addDomain(floating.img_src)"
+    :style="{
+        width: tool.toRem(floating.width),
+        height: tool.toRem(floating.height)
+    }"
+    v-expose="htType + '_EXPOSE_FLOATING_IMG'"
+    v-if="floating.is_show"
+    @handlerFloatingLink="linkToCps(floating, htType + '_LINK_TO_CPS_FLOATING')"></floating>
+    <!-- floating]] -->
+
+    <!-- 活动规则弹框[[ -->
+    <section class="dialog-bg" v-if="isShowRulesDialog" v-expose="htType + '_EXPOSE_MASK_RULES_BOX'" @click.stop="isShowRulesDialog = false" v-stat="htType + '_MODAL_CLOSE_RULES_BOX'">
+        <div class="dialog-wrap" @click.stop>
+            <div class="dialog-container">
+                <img :src="config.dialog_rule_img" class="dialog-rule-img">
+            </div>
+            <div class="dialog-close-img"
+                @click.stop="isShowRulesDialog = false;"
+                v-stat="htType + '_CLICK_BTN_CLOSE_RULES_BOX'">
+            </div>
+        </div>
+    </section>
+    <!-- 活动规则弹框]] -->
+
+    <!-- 领取成功弹框[[ -->
+    <section class="dialog-award-bg" v-if="isShowAwardDialog" v-expose="htType + '_EXPOSE_MASK_AWARD_BOX'" @click.stop="isShowAwardDialog = false" v-stat="htType + '_CLOSE_MASK_AWARD_BOX'" >
+        <div class="dialog-award-wrap">
+            <div class="dialog-award-container">
+                <img :src="config.dialog_award_img" class="dialog-award-img">
+            </div>
+        </div>
+    </section>
+    <!-- 领取成功弹框]] -->
+</div>

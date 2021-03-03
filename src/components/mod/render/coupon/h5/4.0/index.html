@@ -1,0 +1,23 @@
+<div>
+    <!-- 限时抢券 -->
+    <div v-if="isLimit" key="limit">
+        <slot
+            name="coupon"
+            :seceneList="seceneList"
+            :couponList="couponList"
+            :changeSecene="handleChangeSecene"
+            :getCoupon="handleGetLimitCoupon"
+        >
+        </slot>
+    </div>
+    <!-- 券包 -->
+    <div v-else key="bag">
+        <slot
+            name="coupon"
+            :couponList="bagCouponList"
+            :getCoupon="handleGetBagCoupon"
+        >
+        </slot>
+    </div>
+</div>
+

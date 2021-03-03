@@ -1,0 +1,12 @@
+<div :class="wrapClass || 'dish-wrap'">
+    <div class="dish-img js-dish-btn" :style="animateStyle">
+        <slot name="image">
+            <img v-lazy="prizeImage" class="imgauto" alt="">
+        </slot>
+    </div>
+    <div class="dish-btn" @click="handleStart">
+        <slot name="button">
+            <img v-lazy="buttonImage" class="imgauto" alt="" v-stat="'BTN_DRAW_BTN'">
+        </slot>
+    </div>
+</div>

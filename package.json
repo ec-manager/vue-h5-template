@@ -1,1 +1,24 @@
-{"name":"ares2020","private":true,"devDependencies":{},"dependencies":{"css-loader":"0.28.0","postcss-import":"11.0.0","postcss-loader":"2.0.8","postcss-url":"7.2.1","vue":"2.5.22","vue-style-loader":"3.0.1"},"version":"1.0.0"}
+{
+  "name": "ares_biz",
+  "private": true,
+  "devDependencies": {},
+  "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "axios": "^0.21.1",
+    "core-js": "3.7.0",
+    "css-loader": "0.28.0",
+    "postcss-import": "11.0.0",
+    "postcss-loader": "2.0.8",
+    "postcss-url": "7.2.1",
+    "qs": "^6.9.4",
+    "vue": "2.5.22",
+    "vue-awesome-swiper": "2.6.7",
+    "vue-count-to": "^1.0.13",
+    "vue-lazyload": "^1.3.3",
+    "vue-style-loader": "3.0.1",
+    "weixin-js-sdk": "^1.6.0"
+  },
+  "version": "1.0.0"
+}

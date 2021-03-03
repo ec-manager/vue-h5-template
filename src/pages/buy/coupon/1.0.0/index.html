@@ -1,0 +1,296 @@
+<div class="w750" v-if="Object.keys(eventConfig).length">
+    <!-- 头部 -->
+    <immersive-header 
+        :content="headConfig.right_btn_text" 
+        :leftBtnPreventDefault="leftBtnPreventDefault"
+        v-bind="headConfig"
+        @rightBtnCallBack="rightBtnCallBack"
+        @leftBtnCallback="leftBtnCallback"
+        @scrollBottom="scrollBottom"
+        @scroll="scroll"
+        @getHeadHeight="getHeadHeight"
+        v-if="showHead"
+    >
+        <img class="share-icon" :src="imgSrc.shareIcon" alt="" v-if="headConfig.needShare && Object.keys(shareConfig).length">
+    </immersive-header>
+
+    <!-- 邀请返现页面 -->
+    <my-friend 
+        v-bind="friendComponentInfo" 
+        :head-height="headHeight"
+        :is-login="isLogin"
+        :base-info="baseInfo"
+        :config="eventConfig" 
+        v-show="footIndex == 1"
+    ></my-friend>
+
+    <!-- 京东/天猫页面 -->
+    <cps-index
+        v-if="footIndex == 2 || footIndex == 3"
+        v-bind="cpsIndexConfig"
+        @getProductDetailUrl="getProductDetailUrl"
+        @linkToCps="linkToCpsHandler"
+        @setDataReportHandler="setDataReport"
+        @getCpsIndexInfo="getCpsIndexInfo"
+    ></cps-index>
+
+    <!-- 首页 -->
+    <div v-show="footIndex == 0">
+        <!-- 头部背景图 -->
+        <div class="head-img-wrap" :style="{'backgroundImage': 'url('+ bgImg +')', 'padding-top': headHeight ? headHeight + 'px' : tool.toRem(108)}">
+            <!-- 我的返现 -->
+            <section class="bonus-wrap" @click="linkToBonusUrl(bonus.link, 'LINK_TO_CPS_BONUS')">
+                <div class="cps-info-item">
+                    <div class="cps-info-title">
+                        <span>{{bonus.title}}</span>
+                        <span class="super-member" v-if="isSuperMember"><span class="bonus-icon"></span<span>超级会员享双倍返现</span></span>
+                    </div>
+                    <div class="cps-info-num-wrap" v-if="isLogin">
+                        <span class="cps-info-sign">&yen;</span>
+                        <span class="num-wrap">
+                            <countTo class="cps-info-num" :startVal="Number(oldAmount)" :endVal="Number(amount || 0)" :duration="1500" :decimals="2" :separator="''"></countTo>
+                            <span class="diff-amount-tip" v-if="showDiffAmount"><span class="bonus-icon"></span><span>+ &yen;{{diffAmount}}</span></span>
+                        </span>
+                    </div>
+                    <div class="login-tip" v-else>登录查看</div>
+                </div>
+                <span class="cps-info-btn-wrap" v-expose="isLogin ? 'LINK_TO_CPS_BONUS' : 'LINK_TO_LOGIN'">{{isLogin ? bonus.btn_text : '登录'}}</span>
+            </section>
+            <!-- 头部搜索框 -->
+            <div class="search-wrap-content">
+                <div class="search-wrap hide-ios-tap" ref="search_bar" v-if="footIndex == 0" :style="{'top': (headHeight - 1) + 'px'}" v-fixed>
+                    <div class="search-bar" @click="toCpsSearch" v-stat="'LINK_TO_CPS_SEARCH'">
+                        <span class="search-icon"></span>
+                        <div class="input-item">
+                            <swiper :options="searchBarOptions">
+                                <div class="swiper-slide swiper-no-swiping swiper-item"
+                                    v-for="(item, index) in searchBar.placeholder_list"
+                                    :key="'search_' + index">
+                                    <span>{{item}}</span>
+                                </div>
+                            </swiper>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <div class="cps-wrap" ref="cps_wrap">
+            <!-- 乐花卡区[[ -->
+            <section class="lepay-card-wrap" 
+            v-if="showCardInfo" 
+            :class="{'shrink-height': !cardExpand}"
+            @click="receivePrivilegeCard(creditCard, 1)">
+                <div class="card-head-wrap">
+                    <div class="head-left">
+                        <span class="title">{{creditCardConfig.title || '乐花卡分期'}}</span>  
+                        <span class="sub-title" v-if="creditCardCanReceive && creditCardConfig.sub_title">{{creditCardConfig.sub_title}}</span>
+                    </div>
+                    <div class="head-right" v-if="!creditCardCanReceive">
+                        <div class="tag-btn" v-if="creditCardConfig.double_tag">{{creditCardConfig.double_tag}}</div>
+                        <div class="tag-btn quota-btn" @click="cardExpand = !cardExpand">
+                            <span v-if="!cardExpand">{{creditCardConfig.card_tip}} &yen;{{creditCard.cut_amount}}</span>
+                            <span class="arrow-icon" :class="{'shrink-arrow-btn': !cardExpand}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content" :class="{'flex-end': !creditCardCanReceive}">
+                    <div class="quota-info">
+                        <p class="quota-tip">{{creditCardConfig.card_tip}}</p>
+                        <div class="rule-detail">
+                            <span class="yuan">&yen;</span>
+                            <span class="amount">{{creditCard.cut_amount}}</span>
+                            <span class="available-count"><span>x</span>{{creditCard.available_count}}</span>
+                            <span class="unit">{{creditCardConfig.unit}}</span>
+                        </div>
+                    </div>
+                    <template>
+                        <div class="receive-btn" v-if="creditCardCanReceive">{{creditCardConfig.btn_tip || '领取免息额度'}}</div>
+                        <div class="valid-time" v-else-if="creditCard.index_desc">{{creditCard.index_desc}}</div>
+                    </template>
+                </div>
+                <div class="use-way text-of">{{creditCard.pay_desc}}</div>
+            </section>
+            <!-- 乐花卡区]] -->
+
+            <!-- 大促宫格 -->
+            <section class="promote-wrap" v-if="dacuInfo.is_show">
+                <!-- 轮播图[[ -->
+                <div class="slider-show-wrap" ref="slider_show_wrap" v-if="dacuInfo.banner && dacuInfo.banner.length">
+                    <!-- 单张图片 -->
+                    <img class="slide-item-img" v-if="dacuInfo.banner.length == 1"
+                            @click="linkToCpsHandler(dacuInfo.banner[0])"
+                            v-stat="'LINK_DACU_BANNER'"
+                            v-lazy="dacuInfo.banner[0].img" 
+                            v-expose="'EXPOSE_DACU_BANNER'">
+                    <!-- 多张图片轮播 -->
+                    <template v-else>
+                        <swiper :options="swiperOption">
+                            <swiper-slide :key="`slide_${index}`" v-for="(banner, index) in dacuInfo.banner">
+                                <img class="slide-item-img" 
+                                    v-stat="`LINK_DACU_BANNER_${index}`"
+                                    :src="banner.img" 
+                                    v-expose="'EXPOSE_DACU_BANNER_' + index">
+                            </swiper-slide>
+                        </swiper>
+                        <div class="swiper-pagination" slot="pagination"></div>
+                    </template>
+                </div>
+                <!-- 轮播图]] -->
+                <div class="promote-img-wrap" :style="{'background': dacuInfo.img_background || 'linear-gradient(195deg, #FF693B 0%, #E84242 100%)'}" v-if="dacuInfo.img_list && dacuInfo.img_list.length">
+                    <a class="promote-img-item" v-for="(item, index) in dacuInfo.img_list" 
+                        @click="linkToCpsHandler(item)"
+                        v-stat="`PROMOTE_IMG_${index}`">
+                        <div class="promote-img">
+                            <img v-lazy="item.img"/>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- icon位 -->
+            <section class="icon-list-wrap" ref="icon_list">
+                <a class="icon-item" v-for="(icon, index) in iconList" @click="linkToCpsOtherPage(icon, index)" href="javascript:;" :key="'icon_' + index"  v-expose="'LINK_TO_CPS_OTHER_PAGE_' + index">
+                    <div class="logo">
+                        <img v-lazy="icon.icon_url" />
+                    </div>
+                    <div class="icon-desc text-of">{{icon.title}}</div>
+                </a>
+            </section>
+
+            <!-- 运营坑位 -->
+            <section class="banner-wrap" v-if="banner.is_show">
+                <img v-lazy="banner.banner_img" alt="" @click="linkToCpsHandler(banner, 'BANNER_TO_CPS')">
+            </section>
+
+            <!-- 活动运营坑位 -->
+            <section
+                class="product-floor-wrap hide-ios-tap"
+                v-for="(activity, index) in activityList"
+                v-stat="'LINK_TO_CPS_ACTIVITY_' + index"
+                v-expose="'ACTIVITY_PRODUCT_' + index"
+                v-if="activity.product_list && activity.product_list.length > 0"
+                @click="linkToCpsHandler(activity)"
+            >
+                <div class="floor-title">
+                    <div class="title-wrap">
+                        <div class="title-detail text-of">
+                            <span class="title">{{activity.title}}</span>
+                            <p class="sub-title" v-if="activity.sub_title">{{activity.sub_title}}</p>
+                        </div>
+                    </div>
+                    <div class="more" v-if="activity.more"><span>{{activity.more}}</span><span class="arrow"></span></div>
+                    <span class="bg" :style="{'background': activity.bg_background || 'linear-gradient(180deg, #873DE3 0%, #ffffff 100%)'}"></span>
+                </div>
+                <div class="product-list">
+                    <div class="promote-wrap">
+                        <div class="slider-show-wrap">
+                            <swiper :options="activitySwiperOption">
+                                <swiper-slide :key="`slide_${index}`" v-for="(product, pIndex) in activity.product_list" >
+                                    <div class="pro-item" :style="{'background': activity.sku_background || ''}"
+                                        :key="'activity_products' + pIndex"
+                                        v-stat="`LINK_TO_CPS_ACTIVITY_${index}_${pIndex}`"
+                                    >
+                                        <a href="javascript:;" class="pro-wrap">
+                                            <div class="img-wrap">
+                                                <img class="pro-img" :src="product.sku_pic && product.sku_pic[0]" :key="'activity_' + pIndex + '_' + product.sku_id">
+                                            </div>
+                                            <div class="price-info">   
+                                                <div class="price">&yen;{{product.coupon_price || 0}}</div>
+                                                <div class="user-rebate">返&yen;{{product.user_rebate || 0}}</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </swiper-slide>
+                            </swiper>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- 商品Tab -->
+            <div class="tab-wrap" :class="{'sticky': tabListScroll.needSticky}">
+                <div ref="tab_list">
+                    <Tab :headList="tabList" :value="currentTab" @input="selectedTab" v-if="tabList.length > 0" :custom-style="{'top': (headHeight + searchBarHeight - 2) + 'px'}">
+                        <template slot="head" slot-scope="{list}">
+                            <div class="tab-item">
+                                <div class="tab-name">{{list.title}}</div>
+                            </div>
+                        </template>
+                    </Tab>
+                </div>
+            </div>
+            
+            <!-- 商品列表 -->
+            <section class="product-wrap" ref="product_wrap">
+                <!-- 全部分类 -->
+                <activity-product :list="activitySkuList" :channel-icon="channelIcon" @getProductDetailUrl="getProductDetailUrl" v-if="showRecommendList && currentTab == 0"></activity-product>
+                <!-- 其他分类商品 -->
+                <template v-else>
+                    <recommend-product 
+                        :list="cpsProductList"
+                        :hotTag="'INDEX_THEME_RECOMMEND_' + currentTab"
+                        @clickSku="recommendProductClick"
+                    ></recommend-product>
+                </template>
+            </section>
+
+            <!-- 到底提示 -->
+            <section class="footer-tip">{{isLastPage || (showRecommendList && currentTab == 0 && !loading) ? '已经到底了' : '正在加载中...'}}</section>
+        </div>
+    </div>
+
+    <!-- 底部tab -->
+    <section class="footer-wrap">
+        <div class="notice-wrap" v-if="footIndex == 2 || footIndex == 3">
+            <img class="notice-logo" :src="eventConfig.notice_logo">
+            <p class="notice-word">{{eventConfig.notice_word}}</p>
+        </div>
+        <div class="footer-list" :style="{'background': footerList[footIndex].bg_color || 'linear-gradient(0deg, #FF4444 0%, #FC7B7B 100%)'}">
+            <div class="footer-item hide-ios-tap" 
+                v-for="(foot, index) in footerTab"
+                :class="{'footer-item-active': foot.index == footIndex}"
+                @click="switchFootIndex(foot.index)" :key="'foot_' + index" v-stat="foot.stat">
+                <img class="foot-icon" :src="foot.icon" alt="">
+                <div class="foot-text">{{foot.text}}</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 规则弹窗-->
+    <rules-modal v-model="isShowRulesBox"></rules-modal> 
+
+    <!-- 返回顶部[[ -->
+    <go-top></go-top>
+    <!-- 返回顶部]] -->
+
+    <!-- 指引只初始化一次 -->
+    <template v-if="footIndex == 0 && footInit[footIndex] && footInit[footIndex].init">
+         <!-- 入口搜索指引 -->
+        <notice scene="ec_cps_index" :show="guide.isShowIndex" :t_custom_style="{'margin-top': searchBarTop + 'px'}" @noticeReturn="indexNoticeReturn"></notice>
+        <!-- 返回入口教育 -->
+        <notice scene="ec_cps_entry" v-if="guide.isGetEntry" :show="guide.isShowEntry" @noticeReturn="entryNoticeReturn" @noticeAction="clearNotice"></notice>
+        <!-- 返回搜索挽留 -->
+        <notice scene="ec_cps_back" v-if="guide.isGetBack" :show="guide.isShowBack" :t_custom_style="{'margin-top': searchBarTop + 'px'}" @noticeReturn="backNoticeReturn" @noticeAction="clearNotice"></notice>
+        <!-- 营销整图弹窗 -->
+        <notice scene="ec_cps_index_sale" :show="guide.isShowIndexSale" :t_custom_style="indexSaleBoxStyle" @noticeAction="indexSaleNoticeAction"></notice>
+    </template>
+
+    <!-- 自动跳转弹窗 -->
+    <cps-jump-modal v-bind="channelModal" v-model="channelJumpPop.show"></cps-jump-modal>
+
+    <!-- 分享提示弹窗 -->
+    <share-pop v-model="isShowPopShare"></share-pop>
+	
+	<!-- floating -->
+    <floating 
+        :src="floatingInfo.icon" 
+        :style="{
+            width: tool.toRem(floatingInfo.width),
+            height: tool.toRem(floatingInfo.height)
+        }"
+        v-if="footIndex == 0 && floatingInfo.isShow"
+        v-expose="'FLOATING_INDEX_0'"
+        :stat="'FLOATING_INDEX_0'"
+        @handlerFloatingLink="linkToCpsHandler(floatingInfo)"></floating>
+</div>
